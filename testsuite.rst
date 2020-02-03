@@ -3,11 +3,11 @@
 Symbiote Test Suite
 ===================
 
-The test suite is a simple idea - there are two peers `A` and `B` (each on potentially different platforms),
-with some peer-to-peer communications channel between them, which we'll call `Socket`
-(for instance, `ZeroMQ <https://zeromq.org>`_ or a WebSocket). `Socket` only understands some target data type,
-which we'll also call `Target` (for instance, `ByteString` or `ArrayBuffer` for ZeroMQ,
-and `Json` for WebSockets).
+The test suite is a simple idea - there are two peers :code:`A` and :code:`B` (each on potentially different platforms),
+with some peer-to-peer communications channel between them, which we'll call :code:`Socket`
+(for instance, `ZeroMQ <https://zeromq.org>`_ or a WebSocket). :code:`Socket` only understands some target data type,
+which we'll also call :code:`Target` (for instance, :code:`ByteString` or :code:`ArrayBuffer` for ZeroMQ,
+and :code:`Json` for WebSockets).
 
 .. code-block:: none
 
