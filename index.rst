@@ -64,3 +64,4 @@ If you have any other requested implementations or contributions, feel free to o
    :caption: Contents:
 
    Test Suite <testsuite>
+   Test Suite Types <testsuitetypes>
