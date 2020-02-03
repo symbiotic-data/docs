@@ -34,14 +34,16 @@ across-the-board, is from the [Symbiote Test Suite](/testsuite): a protocol for
 randomly generating data, and testing the communication of that data over-the-wire to another platform.
 
 Supported Platforms
-===================
+-------------------
 
 Currently the supported platforms are:
 
 - Haskell
+
   - `symbiotic data implementation <https://github.com/symbiotic-data/symbiotic-haskell>`_
   - `symbiote test suite <https://hackage.haskell.org/package/symbiote>`_
 - PureScript
+
   - `symbiote test suite <https://pursuit.purescript.org/package/purescript-symbiote>`_
 
 There are planned implementations for:
