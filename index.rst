@@ -6,13 +6,6 @@
 Home
 ====
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   Test Suite <testsuite>
-
-
 Symbiotic-Data_ is an initiative intending to standardize
 primitive data types and their serialization formats, on different platforms, programming languages, and target
 encodings.
@@ -63,3 +56,13 @@ There are planned implementations for:
 - D
 
 If you have any other requested implementations or contributions, feel free to open an issue or pull request!
+
+
+Contents
+========
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   Test Suite <testsuite>
