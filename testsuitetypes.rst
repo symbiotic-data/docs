@@ -104,8 +104,8 @@ Binary
 AvailableTopics
 ---------------
 
-In a platform's implementation, an ``AvailableTopics`` is just a mapping from `Topic`s to `Size`s -
-this could be a HashMap, a B-tree map, or a JSON object.
+In a platform's implementation, an ``AvailableTopics`` is just a mapping from ``Topic`` to ``Size`` --- this
+could be a HashMap, a B-tree map, or a JSON object.
 
 
 .. code-block:: haskell
