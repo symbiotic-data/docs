@@ -10,7 +10,7 @@ Home
    :maxdepth: 2
    :caption: Contents:
 
-   testsuite
+   Test Suite <testsuite>
 
 
 Symbiotic-Data_ is an initiative intending to standardize
@@ -31,8 +31,8 @@ rigorously defined for every data type.
 
 ----------------
 
-The backbone of the insurance that these types are indeed _correctly_ serialized and interpreted
-across-the-board, is from the [Symbiote Test Suite](/testsuite): a protocol for
+The backbone of the insurance that these types are indeed *correctly* serialized and interpreted
+across-the-board, is from the :ref:`Symbiote Test Suite <testsuite>`: a protocol for
 randomly generating data, and testing the communication of that data over-the-wire to another platform.
 
 Supported Platforms

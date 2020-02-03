@@ -1,3 +1,5 @@
+.. _testsuite:
+
 Symbiote Test Suite
 ===================
 
