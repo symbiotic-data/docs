@@ -3,7 +3,7 @@
 Symbiote Test Suite
 ===================
 
-The test suite is a simple idea - there are two peers ``A`` and ``B`` (each on potentially different platforms),
+The test suite is a simple idea --- there are two peers ``A`` and ``B`` (each on potentially different platforms),
 with some peer-to-peer communications channel between them, which we'll call ``Socket``
 (for instance, `ZeroMQ <https://zeromq.org>`_ or a WebSocket). ``Socket`` only understands some target data type,
 which we'll also call ``Target`` (for instance, ``ByteString`` or ``ArrayBuffer`` for ZeroMQ,
@@ -53,24 +53,24 @@ As we proceed, our idea of the network might look like this:
 
 
 The entire purpose of this protocol is to test that remote procedure calls are identical to local calls,
-when the data and operation are the same - given that the serialization method is identical, as well.
+when the data and operation are the same --- given that the serialization method is identical, as well.
 
 First and Second
 ----------------
 
 Now for the actual protocol.
 
-The protocol assumes its being run on a 1-to-1 communication mechanism - there's no support for broadcasted
+The protocol assumes its being run on a 1-to-1 communication mechanism --- there's no support for broadcasted
 and subscribed messages; only *one* other peer will be tested while the other is running. This implies
 a constraint on
-how our protocol will operate - one peer needs to be the "first" to operate, and the other needs to be the
+how our protocol will operate --- one peer needs to be the "first" to operate, and the other needs to be the
 "second".
 
-It's not rocket science - if we're generating data and expecting the other party to operate on that
+It's not rocket science --- if we're generating data and expecting the other party to operate on that
 data, then someone has to go first while the other listens for it. If they both went at the same time, there
 would be a race condition. If they both were expecting data, then there'd be a deadlock. Therefore,
 there should be some decision made by the programmer (you) on which peer will be the "first" and which will
-be "second". It doesn't make a difference in the semantic integrity of the test suite - they both will
+be "second". It doesn't make a difference in the semantic integrity of the test suite --- they both will
 generate and consume the same amount of random data.
 
 For simplicity's sake, let's make ``Peer A`` the first, and ``Peer B`` the second.
@@ -285,7 +285,7 @@ will be... first... in doing so?
 I'm Finished
 ------------
 
-I guess I gave it away - ``First`` generates first, so it must also be the first to be finished
+I guess I gave it away --- ``First`` generates first, so it must also be the first to be finished
 generating. It signals this by sending ``ImFinished`` instead of ``YourTurn``.
 
 
