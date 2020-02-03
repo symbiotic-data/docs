@@ -58,8 +58,6 @@ There are planned implementations for:
 If you have any other requested implementations or contributions, feel free to open an issue or pull request!
 
 
-Contents
-========
 
 .. toctree::
    :maxdepth: 2
