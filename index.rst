@@ -10,6 +10,8 @@ Home
    :maxdepth: 2
    :caption: Contents:
 
+   testsuite
+
 
 Symbiotic-Data_ is an initiative intending to standardize
 primitive data types and their serialization formats, on different platforms, programming languages, and target
