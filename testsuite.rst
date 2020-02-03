@@ -17,13 +17,13 @@ and ``Json`` for WebSockets).
    |________|     (Target)    |________|
 
 
-Now, both `Peer A` and `Peer B` understand some "idea" of a data type, which we'll call `Type T`. The
-whole purpose of this test suite is to verify that both peers have an *identical* understanding of `Type T`,
-with respect to how `T` *operates*, **and** how it *translates* to-and-from `Target`.
+Now, both ``Peer A`` and ``Peer B`` understand some "idea" of a data type, which we'll call ``Type T``. The
+whole purpose of this test suite is to verify that both peers have an *identical* understanding of ``Type T``,
+with respect to how `T` *operates*, **and** how it *translates* to-and-from ``Target``.
 
-So, each peer has an idea of what `T` is, and some static set of operations that can be performed on `T`.
-The "operations" on `T` need to be extrapolated into a data type as well, such that every return type
-when performed on a `T` is homogeneous. For instance, if I have functions `f :: T -> T` and `g :: T -> Bool`,
+So, each peer has an idea of what ``T`` is, and some static set of operations that can be performed on ``T``.
+The "operations" on ``T`` need to be extrapolated into a data type as well, such that every return type
+when performed on a ``T`` is homogeneous. For instance, if I have functions ``f :: T -> T`` and ``g :: T -> Bool``,
 then I need to come up with a data type that that can combine them. For instance:
 
 .. code-block:: haskell
@@ -38,7 +38,7 @@ then I need to come up with a data type that that can combine them. For instance
      G -> Right (g x)
 
 
-`Either T Bool` is the "homogeneous return type" of *all* the supported operations on my type `T`.
+``Either T Bool`` is the "homogeneous return type" of *all* the supported operations on my type ``T``.
 
 As we proceed, our idea of the network might look like this:
 
@@ -73,7 +73,7 @@ there should be some decision made by the programmer (you) on which peer will be
 be "second". It doesn't make a difference in the semantic integrity of the test suite - they both will
 generate and consume the same amount of random data.
 
-For simplicity's sake, let's make `Peer A` the first, and `Peer B` the second.
+For simplicity's sake, let's make ``Peer A`` the first, and ``Peer B`` the second.
 
 
 .. code-block:: none
@@ -91,7 +91,7 @@ For simplicity's sake, let's make `Peer A` the first, and `Peer B` the second.
 Generation
 ----------
 
-Now, both peers will take turns in generating, consuming, and exchanging data. `First` will be (you guessed it)
+Now, both peers will take turns in generating, consuming, and exchanging data. ``First`` will be (you guessed it)
 the first one to take a step in that dance. Before they start, though, let's talk about data generation for
 a quick second.
 
@@ -105,10 +105,10 @@ should be.
 Think about it; if we just didn't care about the general size of that random data, and we were
 generating an array, the computer could just generate an infinite set of data just as likely as an empty
 array. What's going to
-tell it to stop? A `size` parameter, that's what.
+tell it to stop? A ``size`` parameter, that's what.
 
 So, in our test suite, every data type we'll be verifying (through generation) **must** have some maximum
-size (as an integer), which we'll approach starting from `0`.
+size (as an integer), which we'll approach starting from ``0``.
 
 The first thing that our peers do is agree upon a set of types to test on, and their respective sizes -
 each peer will take a turn generating the data, incrementing their own counters until they each hit
@@ -117,7 +117,7 @@ the maximum (around the same time).
 The type's name is typically used in the message, but for our intents and
 purposes, we'll call it a "topic", because it's just a string. If the programmer chooses to use a different
 topic than the type's name, then there's no issue, so long as both peers expect the same topic/size pairings.
-We'll call this message `AvailableTopics`, and it's sent by `First`.
+We'll call this message ``AvailableTopics``, and it's sent by ``First``.
 
 
 .. code-block:: none
@@ -134,11 +134,11 @@ We'll call this message `AvailableTopics`, and it's sent by `First`.
                AvailableTopics
 
 
-Just to be clear, `AvailableTopics` is a mapping of *topics* (usually type names) to *sizes*.
+Just to be clear, ``AvailableTopics`` is a mapping of *topics* (usually type names) to *sizes*.
 
-If `Peer B` disagrees with the topics or sizes, it'll throw an error, and reflect that error back to `Peer A`
-so it can explode loudly as well. If all is well, then `Peer B` will tell `Peer A` to start, with the subset of
-`Peer A`'s topics actually in use for this session:
+If ``Peer B`` disagrees with the topics or sizes, it'll throw an error, and reflect that error back to ``Peer A``
+so it can explode loudly as well. If all is well, then ``Peer B`` will tell ``Peer A`` to start, with the subset of
+``Peer A``'s topics actually in use for this session:
 
 .. code-block:: none
 
@@ -160,12 +160,12 @@ so it can explode loudly as well. If all is well, then `Peer B` will tell `Peer 
 First Generating, Second Operating
 ----------------------------------
 
-Now everything is ready to go! Let's get started. First thing is first, `First` will generate a random
-value of type `T` (which we'll call `x :: T`), and a random *operation* on type `T` as `OperationsOnT`
-(which we'll call `op :: OperationsOnT`), with a size-index of `0`.
+Now everything is ready to go! Let's get started. First thing is first, ``First`` will generate a random
+value of type ``T`` (which we'll call ``x :: T``), and a random *operation* on type ``T`` as ``OperationsOnT``
+(which we'll call ``op :: OperationsOnT``), with a size-index of ``0``.
 
-Here, it will pack them both together in a message called `Generated` and send it over the wire to
-`Second` (serialized in the type `Target`, remember).
+Here, it will pack them both together in a message called ``Generated`` and send it over the wire to
+``Second`` (serialized in the type ``Target``, remember).
 
 
 .. code-block:: none
@@ -187,10 +187,10 @@ Here, it will pack them both together in a message called `Generated` and send i
                First Generated
 
 
-`Second` will then decode the message and see a value and
+``Second`` will then decode the message and see a value and
 an operation. All it has to do from here is perform the
-operation `op` on `x`, and get a result (which we'll call `y`). It sends this result back to `First`
-as a message called `Second Operated`.
+operation ``op`` on ``x``, and get a result (which we'll call ``y``). It sends this result back to ``First``
+as a message called ``Second Operated``.
 
 
 .. code-block:: none
@@ -215,8 +215,8 @@ as a message called `Second Operated`.
 
 
 
-Next, `First` has to verify that `y` is indeed `op(x)`. If it's not, explode loudly, and tell `Second`
-to do the same. If it's good, then tell `Second` it's their turn, with a message called `YourTurn`.
+Next, ``First`` has to verify that ``y`` is indeed ``op(x)``. If it's not, explode loudly, and tell ``Second``
+to do the same. If it's good, then tell ``Second`` it's their turn, with a message called ``YourTurn``.
 
 .. code-block:: none
 
@@ -244,7 +244,7 @@ to do the same. If it's good, then tell `Second` it's their turn, with a message
 First Operating, Second Generating
 ----------------------------------
 
-The tables have turned! `First` is now operating, and `Second` gets to generate. The entire process is
+The tables have turned! ``First`` is now operating, and ``Second`` gets to generate. The entire process is
 exactly the same, just reversed:
 
 
@@ -285,8 +285,8 @@ will be... first... in doing so?
 I'm Finished
 ------------
 
-I guess I gave it away - `First` generates first, so it must also be the first to be finished
-generating. It signals this by sending `ImFinished` instead of `YourTurn`.
+I guess I gave it away - ``First`` generates first, so it must also be the first to be finished
+generating. It signals this by sending ``ImFinished`` instead of ``YourTurn``.
 
 
 .. code-block:: none
@@ -328,7 +328,7 @@ generating. It signals this by sending `ImFinished` instead of `YourTurn`.
                  ImFinished
 
 
-After `Second` receives that `ImFinished` message, it will send `ImFinished` also once
+After ``Second`` receives that ``ImFinished`` message, it will send ``ImFinished`` also once
 it has verified its last run.
 
 .. code-block:: none
@@ -385,7 +385,7 @@ can help us catch edge
 cases we didn't consider before hand, or reveal fundamental misunderstandings about how our platform works
 under-the-hood.
 
-Because our scenario only uses one topic `T`, both peers will know that they are finished, and exit without
+Because our scenario only uses one topic ``T``, both peers will know that they are finished, and exit without
 failure.
 
 
