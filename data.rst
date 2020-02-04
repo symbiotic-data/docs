@@ -616,7 +616,7 @@ clearly doesn't need a decimal place, it should be omitted - i.e. ``9.0e+3`` is 
 Binary
 ******
 
-Uses the same UTF8 string format as JSON, but limited to a ``String32``.
+Uses the same UTF8 string format as JSON, but limited to a String32_.
 
 Ratio
 ^^^^^
@@ -745,6 +745,8 @@ Encodes to a ByteString as a ``Vector16`` of ``Char`` s
    encodeBinary :: String16 -> ByteString
    encodeBinary x = vector16ToByteString (map utf8AsByteString (string16AsVector16 x))
 
+
+.. .. _String32:
 
 String32
 ^^^^^^^^
@@ -1045,7 +1047,7 @@ Formatted as its string representation
 Binary
 ******
 
-Encoded as a UTF-8 ``String32`` (though there are only ASCII characters allowed) - other implementations of ``URI8`` etc may
+Encoded as a UTF-8 String32_ (though there are only ASCII characters allowed) - other implementations of ``URI8`` etc may
 exist in a future version.
 
 .. code-block:: haskell
@@ -1404,7 +1406,7 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 16
 StringMap32
 ^^^^^^^^^^^
 
-Mapping where ``String32`` s are the keys - can be implemented as a hash-map internally, or as a JSON object
+Mapping where String32_ s are the keys - can be implemented as a hash-map internally, or as a JSON object
 as the case with JavaScript.
 
 JSON
