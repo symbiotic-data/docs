@@ -6,11 +6,12 @@
 Home
 ====
 
-Symbiotic-Data_ is an initiative intending to standardize
+Symbiotic-Data is an initiative intending to standardize
 primitive data types and their serialization formats, on different platforms, programming languages, and target
 encodings.
 
-.. _Symbiotic-Data: https://github.com/symbiotic-data
+- Symbiotic-Data GitHub `github.com/symbiotic-data <https://github.com/symbiotic-data>`_
+- Symbiotic-Data Home Page `symbiotic-data.io <https://symbiotic-data.io>`_
 
 Different platforms have different paradigms, capabilities, preconceptions, and opinions on how data should
 be formatted and stored - this project aims to clarify some of those differences, and formalize the data,
@@ -63,5 +64,6 @@ If you have any other requested implementations or contributions, feel free to o
    :maxdepth: 2
    :caption: Contents:
 
+   Data Types <data>
    Test Suite <testsuite>
    Test Suite Types <testsuitetypes>
