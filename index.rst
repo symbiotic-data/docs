@@ -93,6 +93,19 @@ its correct behavior in accordance with the standard.
 .. todo::
    Define the property-based testing operations, and the ``Topic`` associated with each Symbiotic-Data type.
 
+.. todo::
+   Define the security and client identifier enrichment mechanisms for each serialization target;
+
+   ZeroMQ is used for binary data, over CurveMQ, with the server public key available in a TXT DNS record.
+
+   WebSocket is used for JSON, and secured through a TLS connections. However, the testing protocol is
+   enriched with a UUID tag for identifying the client connected, similar to Router-Dealer sockets in
+   ZeroMQ.
+
+.. todo::
+   List the reference implementation server links for the serialization targets: ``wss://ws.symbiotic-data.io``
+   and ``tcp://zmq.symbiotic-data.io``
+
 Supported Platforms
 -------------------
 
