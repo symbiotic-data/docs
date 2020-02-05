@@ -47,20 +47,22 @@ following classes of data are defined:
 
 - :ref:`Primitives <primitives>`: Elementary data types supported by most programming languages --- Integers,
   Floating-point numbers, Boolean values, and Strings.
+
 - :ref:`Casual Data <casual>`: Every-day useful data types for various tasks --- Chronological data (like time,
   dates, etc.), and Network-relevant data (URIs, email addresses, etc.) are included under this classification.
+
 - :ref:`Primitive Composites <primitivecomposites>`: Elementary *container* data types --- Fixed-size Arrays,
   Varying-size Vectors, Tuples, and Tagged Unions.
 
-.. note::
-
-   We understand not every language supports parametric polymorphism and cannot implement "container types".
-   However, the behavior is defined such that the user's specialization is still qualified under the same
-   umbrella.
+  We understand not every language supports parametric polymorphism and cannot implement "container types".
+  However, the behavior is defined such that the user's specialization is still qualified under the same
+  umbrella.
 
 - :ref:`Sophisticated Composites <sophisticatedcomposites>`: Specialty container data types --- Mappings,
   Recursive Mappings (`Tries <https://en.wikipedia.org/wiki/Trie>`_), and other complex containers may be placed
-  in here. Sets (unique vectors) are not included due to this being a *serialization* definition library, not a
+  in here.
+
+  Sets (unique vectors) are not included due to this being a *serialization* definition library, not a
   data type library in generally. Similarly, qualified mappings are also not included (i.e. a ``HashMap``),
   because we are only concerned with the different methods of serializing data, not storing it.
 
