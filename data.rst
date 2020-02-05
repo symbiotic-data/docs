@@ -1000,9 +1000,9 @@ Concatenation of both formats (total of 11 bytes).
      (encodeByteStringDate date)
        ++ (encodeByteStringTime time)
 
-.. end code block?
+.. todo::
 
-    - TODO Intervals, Durations
+   - Intervals, Durations
 
 -------------
 
@@ -1147,9 +1147,9 @@ Encoded as a UTF-8 ``String16`` (though there are only ASCII characters allowed)
    encodeByteString :: EmailAddress -> ByteString
    encodeByteString x = utf8AsByteString (emailAddressAsString x)
 
-.. end code block?
+.. todo::
 
-    - TODO International Email Addresses a 'la https://en.wikipedia.org/wiki/International_email
+    - International Email Addresses a 'la https://en.wikipedia.org/wiki/International_email
 
 -------------
 
