@@ -31,6 +31,8 @@ Stores it as the byte ``0``
    encodeBinary :: Unit -> ByteString
    encodeBinary Unit = byteAsByteString 0
 
+-------------
+
 Boolean
 ~~~~~~~
 
@@ -61,6 +63,8 @@ Uses standard bytes ``0`` as false, ``1`` as true
    encodeBinary x = case x of
      True -> byteAsByteString 1
      False -> byteAsByteString 0
+
+-------------
 
 Integral
 ~~~~~~~~
@@ -101,6 +105,8 @@ the upper values in the ``Uint8``.
      then byteAsByteString (intAsUint x)
      else byteAsByteString ((intAsUint (2^7 + x)) + 2^7)
 
+-------------
+
 Int16
 *****
 
@@ -134,6 +140,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 
    encodeBinary :: Int16 -> ByteString
    encodeBinary x = intAsByteStringLE x
+
+-------------
 
 Int32
 *****
@@ -169,6 +177,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Int32 -> ByteString
    encodeBinary x = intAsByteStringLE x
 
+-------------
+
 Int64
 *****
 
@@ -203,6 +213,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Int64 -> ByteString
    encodeBinary x = intAsByteStringLE x
 
+-------------
+
 Unsigned
 ^^^^^^^^
 
@@ -232,6 +244,8 @@ Binary
 
    encodeBinary :: Uint8 -> ByteString
    encodeBinary x = byteAsByteString x
+
+-------------
 
 Uint16
 ******
@@ -268,6 +282,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Uint16 -> ByteString
    encodeBinary x = uintAsByteStringLE x
 
+
+-------------
 
 Uint32
 ******
@@ -307,6 +323,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary x = uintAsByteStringLE x
 
 
+-------------
+
 Uint64
 ******
 
@@ -345,6 +363,8 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary x = uintAsByteStringLE x
 
 
+-------------
+
 Multiple Precision
 ^^^^^^^^^^^^^^^^^^
 
@@ -370,6 +390,8 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is an 8-bit unsigned integer.
 
+-------------
+
 Integer16
 *********
 
@@ -391,6 +413,8 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 16-bit unsigned integer.
+
+-------------
 
 Integer32
 *********
@@ -414,6 +438,8 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 32-bit unsigned integer.
 
+-------------
+
 Integer64
 *********
 
@@ -435,6 +461,8 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 64-bit unsigned integer.
+
+-------------
 
 Natural8
 ********
@@ -458,6 +486,8 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is an 8-bit unsigned integer.
 
+-------------
+
 Natural16
 *********
 
@@ -479,6 +509,8 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 16-bit unsigned integer.
+
+-------------
 
 Natural32
 *********
@@ -502,6 +534,8 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 32-bit unsigned integer.
 
+-------------
+
 Natural64
 *********
 
@@ -523,6 +557,8 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 64-bit unsigned integer.
+
+-------------
 
 Floating Point
 ~~~~~~~~~~~~~~
@@ -560,6 +596,8 @@ There are two byte encodings for any floating point number - big-endian or littl
    encodeBinary x = floatAsByteStringLE x
 
 
+-------------
+
 Float64
 ^^^^^^^
 
@@ -593,6 +631,8 @@ There are two byte encodings for any floating point number - big-endian or littl
    encodeBinary x = floatAsByteStringLE x
 
 
+-------------
+
 Scientific
 ^^^^^^^^^^
 
@@ -617,6 +657,8 @@ Binary
 ******
 
 Uses the same UTF8 string format as JSON, but limited to a String32_.
+
+-------------
 
 Ratio
 ^^^^^
@@ -650,6 +692,8 @@ Encoded as a tuple of the two already encoded values
    encodeBinary (Ratio x y) = x ++ y
 
 
+-------------
+
 UTF-8 Strings
 ~~~~~~~~~~~~~
 
@@ -681,6 +725,8 @@ Encodes to a ByteString as `standard UTF-8 <https://en.wikipedia.org/wiki/UTF-8#
    encodeBinary :: Char -> ByteString
    encodeBinary x = utf8AsByteString x
 
+
+-------------
 
 String8
 ^^^^^^^
@@ -714,6 +760,8 @@ Encodes to a ByteString as a ``Vector8`` of ``Char`` s
    encodeBinary x = vector8ToByteString (map utf8AsByteString (string8AsVector8 x))
 
 
+-------------
+
 String16
 ^^^^^^^^
 
@@ -746,7 +794,7 @@ Encodes to a ByteString as a ``Vector16`` of ``Char`` s
    encodeBinary x = vector16ToByteString (map utf8AsByteString (string16AsVector16 x))
 
 
-.. .. _String32:
+-------------
 
 String32
 ^^^^^^^^
@@ -780,6 +828,8 @@ Encodes to a ByteString as a ``Vector32`` of ``Char`` s
    encodeBinary x = vector32ToByteString (map utf8AsByteString (string32AsVector32 x))
 
 
+-------------
+
 String64
 ^^^^^^^^
 
@@ -811,6 +861,8 @@ Encodes to a ByteString as a ``Vector64`` of ``Char`` s
    encodeBinary :: String64 -> ByteString
    encodeBinary x = vector64ToByteString (map utf8AsByteString (string64AsVector64 x))
 
+
+-------------
 
 Casual
 ------
@@ -860,6 +912,8 @@ And "practical" in the sense of Ancient History (3000 B.C.E.) being the limit of
        ++ (uintAsByteString month)
        ++ (uintAsByteString day)
 
+
+-------------
 
 Time
 ^^^^
@@ -911,6 +965,8 @@ when dealing with large amounts of time data.
          ++ (uintAsByteStringBE millisecond)
 
 
+-------------
+
 DateTime
 ^^^^^^^^
 
@@ -944,8 +1000,11 @@ Concatenation of both formats (total of 11 bytes).
      (encodeByteStringDate date)
        ++ (encodeByteStringTime time)
 
+.. end code block?
 
     - TODO Intervals, Durations
+
+-------------
 
 URI-Like
 ~~~~~~~~
@@ -983,6 +1042,8 @@ Encoded directly as 4 bytes
        ++ (uintAsByteStringBE c)
        ++ (uintAsByteStringBE d)
 
+
+-------------
 
 IPV6
 ^^^^
@@ -1025,6 +1086,8 @@ Encoded directly as 16 bytes
        ++ (uintAsByteStringBE h)
 
 
+-------------
+
 URI
 ^^^
 
@@ -1056,6 +1119,8 @@ exist in a future version.
    encodeByteString x = utf8AsByteString (uriAsString x)
 
 
+-------------
+
 Email Address
 ^^^^^^^^^^^^^
 
@@ -1082,8 +1147,11 @@ Encoded as a UTF-8 ``String16`` (though there are only ASCII characters allowed)
    encodeByteString :: EmailAddress -> ByteString
    encodeByteString x = utf8AsByteString (emailAddressAsString x)
 
+.. end code block?
 
     - TODO International Email Addresses a 'la https://en.wikipedia.org/wiki/International_email
+
+-------------
 
 Primitive Composites
 --------------------
@@ -1127,6 +1195,8 @@ Ommits a size parameter, because the size is encoded in the type signature.
      Cons y ys -> y ++ (encodeBinary ys)
 
 
+-------------
+
 Vector8
 ^^^^^^^
 
@@ -1153,6 +1223,8 @@ Prefixes the length of the array as a 8-bit unsigned integer, big-endian, before
    encodeBinary :: Vector8 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector8 x)
 
+
+-------------
 
 Vector16
 ^^^^^^^^
@@ -1181,6 +1253,8 @@ Prefixes the length of the array as a 16-bit unsigned integer, big-endian, befor
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector16 x)
 
 
+-------------
+
 Vector32
 ^^^^^^^^
 
@@ -1208,6 +1282,8 @@ Prefixes the length of the array as a 32-bit unsigned integer, big-endian, befor
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector32 x)
 
 
+-------------
+
 Vector64
 ^^^^^^^^
 
@@ -1234,6 +1310,8 @@ Prefixes the length of the array as a 64-bit unsigned integer, big-endian, befor
    encodeBinary :: Vector64 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector64 x)
 
+
+-------------
 
 Maybe
 ~~~~~
@@ -1271,6 +1349,8 @@ Use a prefix byte flag to avoid backtracking
      Just y -> (byteAsByteString 1) ++ y
 
 
+-------------
+
 Tuple
 ~~~~~
 
@@ -1300,6 +1380,8 @@ Is equivalent to an array of size 2, therefore avoids a size prefix
    encodeBinary :: Tuple ByteString ByteString -> ByteString
    encodeBinary (Tuple x y) = x ++ y
 
+
+-------------
 
 Either
 ~~~~~~
@@ -1334,6 +1416,8 @@ Flags each case with a byte prefix
      Left y -> (byteAsByteString 0) ++ y
      Right z -> (byteAsByteString 1) ++ z
 
+
+-------------
 
 Sophisticated Composites
 ------------------------
@@ -1372,6 +1456,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 8-
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
 
+-------------
+
 StringMap16
 ^^^^^^^^^^^
 
@@ -1403,6 +1489,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 16
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
 
+-------------
+
 StringMap32
 ^^^^^^^^^^^
 
@@ -1433,6 +1521,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 32
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
+
+-------------
 
 StringMap64
 ^^^^^^^^^^^
@@ -1466,6 +1556,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 64
 
 
 
+
+-------------
 
 Map8
 ^^^^
@@ -1501,6 +1593,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 8-
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
 
+-------------
+
 Map16
 ^^^^^
 
@@ -1534,6 +1628,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 16
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
+
+-------------
 
 Map32
 ^^^^^
@@ -1569,6 +1665,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 32
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
 
+-------------
+
 Map64
 ^^^^^
 
@@ -1603,6 +1701,8 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 64
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
 
+
+-------------
 
 Tries
 ~~~~~
@@ -1645,6 +1745,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
 
+-------------
+
 StringTrie16
 ^^^^^^^^^^^^
 
@@ -1682,6 +1784,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie16 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+
+-------------
 
 StringTrie32
 ^^^^^^^^^^^^
@@ -1721,6 +1825,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
 
+-------------
+
 StringTrie64
 ^^^^^^^^^^^^
 
@@ -1758,6 +1864,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie64 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+
+-------------
 
 Trie8
 ^^^^^
@@ -1797,6 +1905,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
 
+-------------
+
 Trie16
 ^^^^^^
 
@@ -1835,6 +1945,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
 
+-------------
+
 Trie32
 ^^^^^^
 
@@ -1872,6 +1984,8 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (Trie32 ByteString ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+
+-------------
 
 Trie64
 ^^^^^^
