@@ -1,3 +1,5 @@
+.. _testsuitetypes:
+
 Symbiote Test Suite Definitions
 ===============================
 

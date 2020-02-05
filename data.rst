@@ -1,5 +1,9 @@
+.. _data:
+
 Symbiotic Data
 ==============
+
+.. _primitives:
 
 Primitives
 ----------
@@ -864,6 +868,8 @@ Encodes to a ByteString as a ``Vector64`` of ``Char`` s
 
 -------------
 
+.. _casual:
+
 Casual
 ------
 
@@ -1153,6 +1159,8 @@ Encoded as a UTF-8 ``String16`` (though there are only ASCII characters allowed)
 
 -------------
 
+.. _primitivecomposites:
+
 Primitive Composites
 --------------------
 
@@ -1418,6 +1426,8 @@ Flags each case with a byte prefix
 
 
 -------------
+
+.. _sophisticatedcomposites:
 
 Sophisticated Composites
 ------------------------
