@@ -55,7 +55,8 @@ the encoding mechanism used here will do a standard UTF-8 encoding with a 32-bit
        ++ (stringAsByteString t)
 
 
-----
+----------------
+
 Size
 ----
 
@@ -102,7 +103,8 @@ Binary
    encodeBinary (Size s) = intAsByteStringBE s
 
 
----------------
+----------------
+
 AvailableTopics
 ---------------
 
@@ -158,7 +160,8 @@ to each other, and the only thing we have have to worry about is storing *how ma
        pairToByteString (t,s) = (encodeBinary t) ++ (encodeBinary s)
 
 
-----------
+----------------
+
 Generating
 ----------
 
@@ -225,7 +228,8 @@ The different enumerated options will be distinguished by a varying initial byte
 Where ``byteStringWithLength`` prefixes the `ByteString`'s byte-length as a 32-bit integer.
 
 
----------
+----------------
+
 Operating
 ---------
 
@@ -274,7 +278,8 @@ Binary
 
 Where ``byteStringWithLength`` prefixes the `ByteString`'s byte-length as a 32-bit integer.
 
------
+----------------
+
 First
 -----
 
@@ -338,7 +343,8 @@ Binary
          ++ (encodeBinary topic)
          ++ (encodeBinary operating)
 
-------
+----------------
+
 Second
 ------
 
