@@ -1,3 +1,5 @@
+.. _properties:
+
 Algebraic Properties
 ====================
 

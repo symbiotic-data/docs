@@ -90,8 +90,16 @@ randomly generating data, and communicating that data over-the-wire to another p
 Every implementation of Symbiotic-Data should also implement this test suite and protocol, to verify
 its correct behavior in accordance with the standard.
 
+Properties
+----------
+
+The types defined in Symbiotic-Data may satisfy the definitions of certain algebraic objects, and by
+extension should have certain properties of behavior associated with their operations. You can see
+what properties and objects we use in the test suites in the :ref:`Algebraic Properties <properties>`
+page.
+
 .. todo::
-   Define the property-based testing operations, and the ``Topic`` associated with each Symbiotic-Data type.
+   Define the ``Topic`` associated with each Symbiotic-Data type.
 
 .. todo::
    Define the security and client identifier enrichment mechanisms for each serialization target;
@@ -142,5 +150,6 @@ If you have any other requested implementations or contributions, feel free to o
    :caption: Contents:
 
    Data Types <data>
+   Algebraic Properties <properties>
    Test Suite <testsuite>
    Test Suite Types <testsuitetypes>
