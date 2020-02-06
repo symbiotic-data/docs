@@ -1419,7 +1419,7 @@ Flags each case with a byte prefix
 
 .. code-block:: haskell
 
-   encodeBinary :: Either Json Json -> Json
+   encodeBinary :: Either ByteString ByteString -> ByteString
    encodeBinary x = case x of
      Left y -> (byteAsByteString 0) ++ y
      Right z -> (byteAsByteString 1) ++ z
