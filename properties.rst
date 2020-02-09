@@ -175,15 +175,15 @@ Eq has one operation defined on it, ``eq``, and it should be an `equivalence rel
 
    isSymmetric :: Eq a =>
      a -> a -> Bool
-   isSymmetric x y = implies (x == y) (y == x)
+   isSymmetric x y = (x == y) `implies` (y == x)
 
    isTransitive :: Eq a =>
      a -> a -> a -> Bool
-   isTransitive x y z = implies ((x == y) && (y == z)) (x == z)
+   isTransitive x y z = ((x == y) && (y == z)) `implies` (x == z)
 
    hasNegation :: Eq a =>
      a -> a -> Bool
-   hasNegation x y = implies (x /= y) (not (x == y))
+   hasNegation x y = (x /= y) `implies` (not (x == y))
 
 Operations
 ~~~~~~~~~~
@@ -235,3 +235,37 @@ Binary
        (byteAsByteString 2) ++ y ++ z
      EqNegation y ->
        (byteAsByteString 3) ++ y
+
+---------------
+
+Ord
+----
+
+Ord is a superclass of Eq_ and inherit all of its faculties. It has one additional operation
+defined on it, ``compare``, and it should facilitate a `partial order <https://en.wikipedia.org/wiki/Partially_ordered_set>`_
+through the ``Ordering`` type.
+
+.. code-block:: haskell
+
+   data Ordering = LT | EQ | GT
+
+   class Ord a where
+     compare :: a -> a -> Ordering
+
+   (<=) :: Ord a => a -> a -> Bool
+   x <= y = case compare x y of
+     LT -> True
+     Eq -> True
+     GT -> False
+
+   isReflexive :: Ord a =>
+     a -> Bool
+   isReflexive x = x <= x
+
+   isAntisymmetric :: Ord a =>
+     a -> a -> Bool
+   isAntisymmetric x y = ((x <= y) && (y <= x)) `implies` (x == y)
+
+   isTransitive :: Ord a =>
+     a -> a -> a -> Bool
+   isTransitive x y z = ((x <= y) && (y <= z)) `implies` (x <= z)
