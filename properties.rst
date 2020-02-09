@@ -417,3 +417,121 @@ Binary
        (byteAsByteString 2)
      EnumSuccPred ->
        (byteAsByteString 3)
+
+---------------
+
+Semiring
+--------
+
+Semiring has four operations defined on it, ``zero``, ``one``, ``add``, and ``mul``. It should form a `semiring <https://en.wikipedia.org/wiki/Semiring>`_.
+
+.. code-block:: haskell
+
+   class Semiring a where
+     zero :: a
+     one :: a
+     add :: a -> a -> a
+     mul :: a -> a -> a
+
+   associative :: (a -> a -> a) -> a -> a -> a -> Bool
+   associative f x y z = (f x (f y z)) == (f (f x y) z)
+
+   commutative :: (a -> a -> a) -> a -> a -> Bool
+   commutative f x y = (f x y) == (f y x)
+
+   distributive :: (a -> a) -> (a -> a -> a) -> a -> a -> Bool
+   distributive f g x y = (f (g x y)) == (g (f x) (f y))
+
+   isCommutativeMonoid :: Semiring a =>
+     a -> a -> a -> Bool
+   isCommutativeMonoid x y z =
+     (associative add x y z)
+       && (commutative add x y)
+       -- zero is the empty element for add
+       && ((add x zero) == x)
+
+   isMonoid :: Semiring a =>
+     a -> a -> a -> Bool
+   isMonoid x y z =
+     (associative mul x y z)
+       -- one is the empty element for mul
+       && ((mul x one) == x)
+
+   isLeftDistributive :: Semiring a =>
+     a -> a -> a -> Bool
+   isLeftDistributive x y z =
+     distributive (\q -> mul x q) add y z
+
+   isRightDistributive :: Semiring a =>
+     a -> a -> a -> Bool
+   isRightDistributive x y z =
+     distributive (\q -> mul q x) add y z
+
+   hasAnnihilation :: Semiring a =>
+     a -> Bool
+   hasAnnihilation x =
+     ((mul x 0) == (mul 0 x))
+       && ((mul x 0) == 0)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data SemiringOperation a
+     = SemiringCommutativeMonoid a a
+     | SemiringMonoid a a
+     | SemiringLeftDistributive a a
+     | SemiringRightDistributive a a
+     | SemiringAnnihilation
+
+   performSemiring :: Semiring a =>
+     SemiringOperation a -> a -> Bool
+   performSemiring op x = case op of
+     SemiringCommutativeMonoid y x ->
+       isCommutativeMonoid x y z
+     SemiringMonoid y z ->
+       isMonoid x y z
+     SemiringLeftDistributive y z ->
+       isLeftDistributive x y z
+     SemiringRightDistributive y z ->
+       isRightDistributive x y z
+     SemiringAnnihilation ->
+       hasAnnihilation x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: SemiringOperation Json -> Json
+   encodeJson op = case op of
+     SemiringCommutativeMonoid y z ->
+       {"commutativeMonoid": {"y": y, "z": z}}
+     SemiringMonoid y z ->
+       {"monoid": {"y": y, "z": z}}
+     SemiringLeftDistributive y z ->
+       {"leftDistributive": {"y": y, "z": z}}
+     SemiringRightDistributive y z ->
+       {"rightDistributive": {"y": y, "z": z}}
+     SemiringAnnihilation ->
+       "annihilation"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: SemiringOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     SemiringCommutativeMonoid y z ->
+       (byteToByteString 0) ++ y ++ z
+     SemiringMonoid y z ->
+       (byteToByteString 1) ++ y ++ z
+     SemiringLeftDistributive y z ->
+       (byteToByteString 2) ++ y ++ z
+     SemiringRightDistributive y z ->
+       (byteToByteString 3) ++ y ++ z
+     SemiringAnnihilation ->
+       (byteToByteString 4)
+      
