@@ -125,9 +125,12 @@ JSON
 
    encodeJson :: MonoidOperation Json -> Json
    encodeJson op = case op of
-     MonoidSemigroup op' -> {"semigroup": encodeJson op'}
-     MonoidLeftIdentity -> "leftIdentity"
-     MonoidRightIdentity -> "rightIdentity"
+     MonoidSemigroup op' ->
+       {"semigroup": encodeJson op'}
+     MonoidLeftIdentity ->
+       "leftIdentity"
+     MonoidRightIdentity ->
+       "rightIdentity"
 
 Binary
 ******
@@ -137,7 +140,7 @@ Binary
    encodeBinary :: MonoidOperation ByteString -> ByteString
    encodeBinary op = case op of
      MonoidSemigroup op' ->
-       (byteAsByteString 0) ++ op'
+       (byteAsByteString 0) ++ encodeBinary op'
      MonoidLeftIdentity ->
        (byteAsByteString 1)
      MonoidRightIdentity ->
@@ -215,10 +218,14 @@ JSON
 
    encodeJson :: EqOperation Json -> Json
    encodeJson op = case op of
-     EqReflexive -> "reflexive"
-     EqSymmetry y -> {"symmetry": y}
-     EqTransitive y z -> {"transitive": {"y": y, "z": z}}
-     EqNegation y -> {"negation": y}
+     EqReflexive ->
+       "reflexive"
+     EqSymmetry y ->
+       {"symmetry": y}
+     EqTransitive y z ->
+       {"transitive": {"y": y, "z": z}}
+     EqNegation y ->
+       {"negation": y}
 
 Binary
 ******
@@ -276,13 +283,16 @@ Operations
 .. code-block:: haskell
 
    data OrdOperation a
-     = OrdReflexive
+     = OrdEq (EqOperation a)
+     | OrdReflexive
      | OrdAntiSymmetry a
      | OrdTransitive a a
 
    performOrd :: Ord a =>
      OrdOperation a -> a -> Bool
    performOrd op x = case op of
+     OrdEq op' ->
+       performEq op' x
      OrdReflexive ->
        isReflexive x
      OrdAntiSymmetry y ->
@@ -297,9 +307,14 @@ JSON
 
    encodeJson :: OrdOperation Json -> Json
    encodeJson op = case op of
-     OrdReflexive -> "reflexive"
-     OrdAntiSymmetry y -> {"antisymmetry": y}
-     OrdTransitive y z -> {"transitive": {"y": y, "z": z}}
+     OrdEq op' ->
+       {"eq": encodeJson op'}
+     OrdReflexive ->
+       "reflexive"
+     OrdAntiSymmetry y ->
+       {"antisymmetry": y}
+     OrdTransitive y z ->
+       {"transitive": {"y": y, "z": z}}
 
 Binary
 ******
@@ -308,9 +323,97 @@ Binary
 
    encodeBinary :: OrdOperation ByteString -> ByteString
    encodeBinary op = case op of
+     OrdEq op' ->
+       (byteAsByteString 0) ++ encodeBinary op'
      OrdReflexive ->
-       (byteAsByteString 0)
+       (byteAsByteString 1)
      OrdAntiSymmetry y ->
-       (byteAsByteString 1) ++ y
+       (byteAsByteString 2) ++ y
      OrdTransitive y z ->
-       (byteAsByteString 2) ++ y ++ z
+       (byteAsByteString 3) ++ y ++ z
+
+---------------
+
+Enum
+----
+
+Enum is **not** a superclass of Ord_, but it uses its faculties in testing. It has four operations
+defined on it, ``pred``, ``succ``, ``toEnum``, and ``fromEnum``.
+``pred`` and ``succ`` should be opposite - `isomorphic <https://en.wikipedia.org/wiki/Isomorphism>`_ over composition.
+Furthermore, ``fromEnum`` should be `homomorphic <https://en.wikipedia.org/wiki/Homomorphism>`_ over ``compare``.
+Enums are `total orders <https://en.wikipedia.org/wiki/Total_order>`_.
+
+.. code-block:: haskell
+
+   class Enum a where
+     pred :: a -> a
+     succ :: a -> a
+     toEnum :: Int -> Maybe a
+     fromEnum :: a -> Int
+
+   predsucc :: Enum a =>
+     a -> Bool
+   predsucc x = (pred (succ x)) == x
+
+   succpred :: Enum a =>
+     a -> Bool
+   succpred x = (succ (pred x)) == x
+
+   compareHom :: Enum a => Ord a =>
+     a -> a -> Bool
+   compareHom x y = (compare x y) == (compare (fromEnum x) (fromEnum y))
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data EnumOperation a
+     = EnumOrd (OrdOperation a)
+     | EnumCompareHom a
+     | EnumPredSucc
+     | EnumSuccPred
+
+   performEnum :: Enum a => Ord a =>
+     EnumOperation a -> a -> Bool
+   performEnum op x = case op of
+     EnumOrd op' ->
+       perfromOrd op' x
+     EnumCompareHom y ->
+       compareHom x y
+     EnumPredSucc ->
+       predsucc x
+     EnumSuccPred ->
+       succpred x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: EnumOperation Json -> Json
+   encodeJson op = case op of
+     EnumOrd op' ->
+       {"ord": enocdeJson op'}
+     EnumCompareHom y ->
+       {"compareHom": y}
+     EnumPredSucc ->
+       "predsucc"
+     EnumSuccPred ->
+       "succpred"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: EnumOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     EnumOrd op' ->
+       (byteAsByteString 0) ++ encodeBinary op'
+     EnumCompareHom y ->
+       (byteAsByteString 1) ++ y
+     EnumPredSucc ->
+       (byteAsByteString 2)
+     EnumSuccPred ->
+       (byteAsByteString 3)
