@@ -269,3 +269,48 @@ through the ``Ordering`` type.
    isTransitive :: Ord a =>
      a -> a -> a -> Bool
    isTransitive x y z = ((x <= y) && (y <= z)) `implies` (x <= z)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data OrdOperation a
+     = OrdReflexive
+     | OrdAntiSymmetry a
+     | OrdTransitive a a
+
+   performOrd :: Ord a =>
+     OrdOperation a -> a -> Bool
+   performOrd op x = case op of
+     OrdReflexive ->
+       isReflexive x
+     OrdAntiSymmetry y ->
+       isAntiSymmetric x y
+     OrdTransitive y z ->
+       isTransitive x y z
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: OrdOperation Json -> Json
+   encodeJson op = case op of
+     OrdReflexive -> "reflexive"
+     OrdAntiSymmetry y -> {"antisymmetry": y}
+     OrdTransitive y z -> {"transitive": {"y": y, "z": z}}
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: OrdOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     OrdReflexive ->
+       (byteAsByteString 0)
+     OrdAntiSymmetry y ->
+       (byteAsByteString 1) ++ y
+     OrdTransitive y z ->
+       (byteAsByteString 2) ++ y ++ z
