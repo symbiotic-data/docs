@@ -6,6 +6,28 @@ Algebraic Properties
 The various data types defined in Symbiotic-Data form various algebraic objects, and by extension support
 certain properties over their operations.
 
+The superclass structure is as follows:
+
+.. code-block:: none
+
+   Semigroup
+     => Monoid
+
+   Eq
+     => Ord
+       => Enum
+
+   Semiring
+     => Ring
+       => DivisionRing ------\
+       => CommutativeRing     => Field
+         => EuclideanRing ---/
+
+That is, a ``Field`` is both a ``DivisionRing`` and a ``EuclideanRing``, following the `PureScript taxonomy <https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Field>`_.
+      
+---------------
+
+
 Semigroup
 ---------
 
@@ -120,3 +142,96 @@ Binary
        (byteAsByteString 1)
      MonoidRightIdentity ->
        (byteAsByteString 2)
+
+---------------
+
+Eq
+----
+
+Eq has one operation defined on it, ``eq``, and it should be an `equivalence relation <https://en.wikipedia.org/wiki/Equivalence_relation>`_ (reflexive, symmetric, and transitive), and should support negation.
+
+.. code-block:: haskell
+
+   class Eq a where
+     (==) :: a -> a -> Bool
+     (/=) :: a -> a -> Bool
+     x /= y = not (x == y) -- default instance
+
+   not :: Bool -> Bool
+   not True = False
+   not False = True
+
+   implies :: Bool -> Bool -> Bool
+   implies True True = True
+   implies True False = False
+   implies False True = True
+   implies False False = True
+   -- alternative definition
+   implies p q = if p then q else True
+
+   isReflexive :: Eq a =>
+     a -> Bool
+   isReflexive x = x == x
+
+   isSymmetric :: Eq a =>
+     a -> a -> Bool
+   isSymmetric x y = implies (x == y) (y == x)
+
+   isTransitive :: Eq a =>
+     a -> a -> a -> Bool
+   isTransitive x y z = implies ((x == y) && (y == z)) (x == z)
+
+   hasNegation :: Eq a =>
+     a -> a -> Bool
+   hasNegation x y = implies (x /= y) (not (x == y))
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data EqOperation a
+     = EqReflexive
+     | EqSymmetry a
+     | EqTransitive a a
+     | EqNegation a
+
+   performEq :: Eq a =>
+     EqOperation a -> a -> Bool
+   performEq op x = case op of
+     EqReflexive ->
+       isReflexive x
+     EqSymmetric y ->
+       isSymmetry x y
+     EqTransitive y z ->
+       isTransitive x y z
+     EqNegation y ->
+       hasNegation x y
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: EqOperation Json -> Json
+   encodeJson op = case op of
+     EqReflexive -> "reflexive"
+     EqSymmetry y -> {"symmetry": y}
+     EqTransitive y z -> {"transitive": {"y": y, "z": z}}
+     EqNegation y -> {"negation": y}
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: EqOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     EqReflexive ->
+       (byteAsByteString 0)
+     EqSymmetry y ->
+       (byteAsByteString 1) ++ y
+     EqTransitive y z ->
+       (byteAsByteString 2) ++ y ++ z
+     EqNegation y ->
+       (byteAsByteString 3) ++ y
