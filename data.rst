@@ -1848,10 +1848,10 @@ Use a prefix byte flag to avoid backtracking
      Just y -> (byteAsByteString 1) ++ y
 
 Symbiote Test Suite Instance
-****************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Topic
-"""""
+*****
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed as ``Maybe Int32``.
@@ -1893,10 +1893,10 @@ Is equivalent to an array of size 2, therefore avoids a size prefix
    encodeBinary (Tuple x y) = x ++ y
 
 Symbiote Test Suite Instance
-****************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Topic
-"""""
+*****
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed as ``Tuple Int32 Int32``.
@@ -1942,10 +1942,10 @@ Flags each case with a byte prefix
      Right z -> (byteAsByteString 1) ++ z
 
 Symbiote Test Suite Instance
-****************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Topic
-"""""
+*****
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed as ``Either Int32 Int32``.
