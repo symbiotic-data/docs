@@ -707,3 +707,117 @@ Binary
        (byteToByteString 0) ++ encodeBinary op'
      CommutativeRingCommutative y ->
        (byteToByteString 1) ++ y
+
+---------------
+
+EuclideanRing
+-------------
+
+EuclideanRing is a superclass of CommutativeRing_ and inherit all of its faculties. It has three additional operations
+defined on it, ``mod``, ``div``, and ``degree``. It should facilitate a `Euclidean domain <https://en.wikipedia.org/wiki/Euclidean_domain>`_,
+however, we can only test for the integral domain (due to language compatibility).
+
+.. code-block:: haskell
+
+   class EuclideanRing a where
+     degree :: a -> Int
+     mod :: a -> a -> a
+     div :: a -> a -> a
+
+   isIntegralDomain :: EuclideanRing a =>
+     a -> a -> Bool
+   isIntegralDomain x y = ((x /= zero) && (y /= zero)) `implies` ((mul x y) /= zero)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data EuclideanRingOperation a
+     = EuclideanRingCommutativeRing (CommutativeRingOperation a)
+     | EuclideanRingIntegralDomain a
+
+   performEuclideanRing :: EuclideanRing a =>
+     EuclideanRingOperation a -> a -> Bool
+   performEuclideanRing op x = case op of
+     EuclideanRingCommutativeRing op' ->
+       performCommutativeRing op' x
+     EuclideanRingIntegralDomain y ->
+       isIntegralDomain x y
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: EuclideanRingOperation Json -> Json
+   encodeJson op = case op of
+     EuclideanRingCommutativeRing op' ->
+       {"commutativeRing": encodeJson op'}
+     EuclideanRingIntegralDomain y ->
+       {"integralDomain": y}
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: EuclideanRingOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     EuclideanRingCommutativeRing op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     EuclideanRingIntegralDomain y ->
+       (byteToByteString 1) ++ y
+
+---------------
+
+Field
+-----
+
+Field is a superclass of both DivisionRing_ and EuclideanRing_, and inherit all of their faculties. It has no additional operation
+defined on it, but is a `field <https://en.wikipedia.org/wiki/Field_(mathematics)>`_.
+
+.. code-block:: haskell
+
+   class Field a
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data FieldOperation a
+     = FieldDivisionRing (DivisionRingOperation a)
+     | FieldEuclideanRing (EuclideanRingOperation a)
+
+   performField :: Field a =>
+     FieldOperation a -> a -> Bool
+   performField op x = case op of
+     FieldDivisionRing op' ->
+       performDivisionRing op' x
+     FieldEuclideanRing op' ->
+       performEuclideanRing op' x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: FieldOperation Json -> Json
+   encodeJson op = case op of
+     FieldDivisionRing op' ->
+       {"divisionRing": encodeJson op'}
+     FieldEuclideanRing op' ->
+       {"euclideanRing": encodeJson op'}
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: FieldOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     FieldDivisionRing op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     FieldEuclideanRing op' ->
+       (byteToByteString 1) ++ encodeBinary op'
