@@ -592,3 +592,60 @@ Binary
        (byteAsByteString 0) ++ encodeBinary op'
      RingAdditiveInverse ->
        (byteAsByteString 1)
+
+---------------
+
+CommutativeRing
+---------------
+
+CommutativeRing is a superclass of Ring_ and inherit all of its faculties. It has no additional operation
+defined on it, but assumes ``mul`` is `commutative <https://en.wikipedia.org/wiki/Commutative_property>`_.
+
+.. code-block:: haskell
+
+   class CommutativeRing a
+
+   isCommutative :: CommutativeRing a =>
+     a -> a -> Bool
+   isCommutative x y = (mul x y) == (mul y x)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data CommutativeRingOperation a
+     = CommutativeRingRing (RingOperation a)
+     | CommutativeRingCommutative a
+
+   performCommutativeRing :: CommutativeRing a =>
+     CommutativeRingOperation a -> a -> Bool
+   performCommutativeRing op x = case op of
+     CommutativeRingRing op' ->
+       performRing op' x
+     CommutativeRingCommutative y ->
+       isCommutative x y
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: CommutativeRingOperation Json -> Json
+   encodeJson op = case op of
+     CommutativeRingRing op' ->
+       {"ring": encodeJson op'}
+     CommutativeRingCommutative y ->
+       {"commutative": y}
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: CommutativeRingOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     CommutativeRingRing op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     CommutativeRingCommutative y ->
+       (byteToByteString 1) ++ y
