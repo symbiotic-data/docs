@@ -88,7 +88,8 @@ and interpreted is due to the :ref:`Symbiote Test Suite <testsuite>`: a protocol
 randomly generating data, and communicating that data over-the-wire to another platform.
 
 Every implementation of Symbiotic-Data should also implement this test suite and protocol, to verify
-its correct behavior in accordance with the standard.
+its correct behavior in accordance with the standard. Every :ref:`data type <data>` in the standard
+declares what operations it supports.
 
 Properties
 ----------
@@ -96,10 +97,8 @@ Properties
 The types defined in Symbiotic-Data may satisfy the definitions of certain algebraic objects, and by
 extension should have certain properties of behavior associated with their operations. You can see
 what properties and objects we use in the test suites in the :ref:`Algebraic Properties <properties>`
-page.
-
-.. todo::
-   Define the ``Topic`` associated with each Symbiotic-Data type.
+page. Every :ref:`data type <data>` in the standard declares what instances it supports, and by
+extension, how they are used in the test suite as testable operations.
 
 .. todo::
    Define the security and client identifier enrichment mechanisms for each serialization target;
