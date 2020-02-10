@@ -534,4 +534,61 @@ Binary
        (byteToByteString 3) ++ y ++ z
      SemiringAnnihilation ->
        (byteToByteString 4)
-      
+
+---------------
+
+Ring
+----
+
+Ring is a superclass of Semiring_ and inherit all of its faculties. It has one additional operation
+defined on it, ``sub``, and it should facilitate an `additive inverse <https://en.wikipedia.org/wiki/Additive_inverse>`_.
+
+.. code-block:: haskell
+
+   class Ring a where
+     sub :: a -> a -> a
+
+   isAdditiveInverse :: Ring a =>
+     a -> Bool
+   isAdditiveInverse x = (sub x x) == zero
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data RingOperation a
+     = RingSemiring (SemiringOperation a)
+     | RingAdditiveInverse
+
+   performRing :: Ring a =>
+     RingOperation a -> a -> Bool
+   performRing op x = case op of
+     RingSemiring op' ->
+       performSemiring op' x
+     RingAdditiveInverse ->
+       isAdditiveInverse x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: RingOperation Json -> Json
+   encodeJson op = case op of
+     RingSemiring op' ->
+       {"semiring": encodeJson op'}
+     RingAdditiveInverse ->
+       "additiveInverse"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: RingOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     RingSemiring op' ->
+       (byteAsByteString 0) ++ encodeBinary op'
+     RingAdditiveInverse ->
+       (byteAsByteString 1)
