@@ -138,8 +138,7 @@ the upper values in the ``Uint8``.
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Int8``.
@@ -187,8 +186,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Int16``.
@@ -236,8 +234,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Int32``.
@@ -285,8 +282,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Int64``.
@@ -330,8 +326,7 @@ Binary
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Uint8``.
@@ -380,8 +375,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Uint16``.
@@ -433,8 +427,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Uint32``.
@@ -486,8 +479,7 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Uint64``.
@@ -527,8 +519,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Integer8``.
@@ -564,8 +555,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Integer16``.
@@ -601,8 +591,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Integer32``.
@@ -638,8 +627,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Integer64``.
@@ -675,8 +663,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Natural8``.
@@ -712,8 +699,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Natural16``.
@@ -749,8 +735,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Natural32``.
@@ -786,8 +771,7 @@ Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-
 Symbiote Test Suite Instance
 """"""""""""""""""""""""""""
 
-Topic
-&&&&&
+- Topic
 
 String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
 Composed solely as ``Natural64``.
