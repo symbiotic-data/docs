@@ -595,6 +595,64 @@ Binary
 
 ---------------
 
+DivisionRing
+------------
+
+DivisionRing is a superclass of Ring_ and inherit all of its faculties. It has one additional operation
+defined on it, ``recip``, and it should facilitate a `multiplicative inverse <https://en.wikipedia.org/wiki/Multiplicative_inverse>`_.
+
+.. code-block:: haskell
+
+   class DivisionRing a where
+     recip :: a -> a
+
+   isInverse :: DivisionRing a =>
+     a -> Bool
+   isInverse x = (x /= zero) `implies` ((mul x (recip x)) == one)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data DivisionRingOperation a
+     = DivisionRingRing (RingOperation a)
+     | DivisionRingInverse
+
+   performDivisionRing :: DivisionRing a =>
+     DivisionRingOperation a -> a -> Bool
+   performDivisionRing op x = case op of
+     DivisionRingRing op' ->
+       performRing op' x
+     DivisionRingInverse ->
+       isInverse x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: DivisionRingOperation Json -> Json
+   encodeJson op = case op of
+     DivisionRingRing op' ->
+       {"ring": encodeJson op'}
+     DivisionRingInverse ->
+       "inverse"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: DivisionRingOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     DivisionRingRing op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     DivisionRingInverse ->
+       (byteToByteString 1)
+
+---------------
+
 CommutativeRing
 ---------------
 
