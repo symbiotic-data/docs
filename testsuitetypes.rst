@@ -3,6 +3,8 @@
 Symbiote Test Suite Definitions
 ===============================
 
+.. _topic:
+
 Topic
 -----
 

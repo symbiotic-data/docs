@@ -35,6 +35,16 @@ Stores it as the byte ``0``
    encodeBinary :: Unit -> ByteString
    encodeBinary Unit = byteAsByteString 0
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Unit``.
+
+.. code-block:: none
+
+   "Unit"
+
 -------------
 
 Boolean
@@ -67,6 +77,16 @@ Uses standard bytes ``0`` as false, ``1`` as true
    encodeBinary x = case x of
      True -> byteAsByteString 1
      False -> byteAsByteString 0
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Boolean``.
+
+.. code-block:: none
+
+   "Boolean"
 
 -------------
 
@@ -109,6 +129,16 @@ the upper values in the ``Uint8``.
      then byteAsByteString (intAsUint x)
      else byteAsByteString ((intAsUint (2^7 + x)) + 2^7)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Int8``.
+
+.. code-block:: none
+
+   "Int8"
+
 -------------
 
 Int16
@@ -144,6 +174,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 
    encodeBinary :: Int16 -> ByteString
    encodeBinary x = intAsByteStringLE x
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Int16``.
+
+.. code-block:: none
+
+   "Int16"
 
 -------------
 
@@ -181,6 +221,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Int32 -> ByteString
    encodeBinary x = intAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Int32``.
+
+.. code-block:: none
+
+   "Int32"
+
 -------------
 
 Int64
@@ -217,6 +267,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Int64 -> ByteString
    encodeBinary x = intAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Int64``.
+
+.. code-block:: none
+
+   "Int64"
+
 -------------
 
 Unsigned
@@ -248,6 +308,16 @@ Binary
 
    encodeBinary :: Uint8 -> ByteString
    encodeBinary x = byteAsByteString x
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Uint8``.
+
+.. code-block:: none
+
+   "Uint8"
 
 -------------
 
@@ -285,6 +355,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
 
    encodeBinary :: Uint16 -> ByteString
    encodeBinary x = uintAsByteStringLE x
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Uint16``.
+
+.. code-block:: none
+
+   "Uint16"
 
 
 -------------
@@ -326,6 +406,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Uint32 -> ByteString
    encodeBinary x = uintAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Uint32``.
+
+.. code-block:: none
+
+   "Uint32"
+
 
 -------------
 
@@ -366,6 +456,16 @@ There are two byte encodings for any integer larger than 8 bits - big-endian or 
    encodeBinary :: Uint64 -> ByteString
    encodeBinary x = uintAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Uint64``.
+
+.. code-block:: none
+
+   "Uint64"
+
 
 -------------
 
@@ -394,6 +494,16 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is an 8-bit unsigned integer.
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Integer8``.
+
+.. code-block:: none
+
+   "Integer8"
+
 -------------
 
 Integer16
@@ -417,6 +527,16 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 16-bit unsigned integer.
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Integer16``.
+
+.. code-block:: none
+
+   "Integer16"
 
 -------------
 
@@ -442,6 +562,16 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 32-bit unsigned integer.
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Integer32``.
+
+.. code-block:: none
+
+   "Integer32"
+
 -------------
 
 Integer64
@@ -465,6 +595,16 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-246>`_, but with the concern that the length of unrolled bytes is a 64-bit unsigned integer.
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Integer64``.
+
+.. code-block:: none
+
+   "Integer64"
 
 -------------
 
@@ -490,6 +630,16 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is an 8-bit unsigned integer.
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Natural8``.
+
+.. code-block:: none
+
+   "Natural8"
+
 -------------
 
 Natural16
@@ -513,6 +663,16 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 16-bit unsigned integer.
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Natural16``.
+
+.. code-block:: none
+
+   "Natural16"
 
 -------------
 
@@ -538,6 +698,16 @@ Binary
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 32-bit unsigned integer.
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Natural32``.
+
+.. code-block:: none
+
+   "Natural32"
+
 -------------
 
 Natural64
@@ -561,6 +731,16 @@ Binary
 """"""
 
 Performed via `cereal byte-unrolling <http://hackage.haskell.org/package/cereal-0.5.8.1/docs/src/Data.Serialize.html#line-306>`_, but with the concern that the length of unrolled bytes is a 64-bit unsigned integer.
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Natural64``.
+
+.. code-block:: none
+
+   "Natural64"
 
 -------------
 
@@ -599,6 +779,16 @@ There are two byte encodings for any floating point number - big-endian or littl
    encodeBinary :: Float32 -> ByteString
    encodeBinary x = floatAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Float32``.
+
+.. code-block:: none
+
+   "Float32"
+
 
 -------------
 
@@ -634,6 +824,16 @@ There are two byte encodings for any floating point number - big-endian or littl
    encodeBinary :: Float64 -> ByteString
    encodeBinary x = floatAsByteStringLE x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Float64``.
+
+.. code-block:: none
+
+   "Float64"
+
 
 -------------
 
@@ -661,6 +861,16 @@ Binary
 ******
 
 Uses the same UTF8 string format as JSON, but limited to a String32_.
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Scientific``.
+
+.. code-block:: none
+
+   "Scientific"
 
 -------------
 
@@ -694,6 +904,16 @@ Encoded as a tuple of the two already encoded values
 
    encodeBinary :: Ratio ByteString -> ByteString
    encodeBinary (Ratio x y) = x ++ y
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Ratio Int32 Int32``.
+
+.. code-block:: none
+
+   "Ratio"
 
 
 -------------
@@ -729,6 +949,16 @@ Encodes to a ByteString as `standard UTF-8 <https://en.wikipedia.org/wiki/UTF-8#
    encodeBinary :: Char -> ByteString
    encodeBinary x = utf8AsByteString x
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Char``.
+
+.. code-block:: none
+
+   "Char"
+
 
 -------------
 
@@ -762,6 +992,16 @@ Encodes to a ByteString as a ``Vector8`` of ``Char`` s
 
    encodeBinary :: String8 -> ByteString
    encodeBinary x = vector8ToByteString (map utf8AsByteString (string8AsVector8 x))
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``String8``.
+
+.. code-block:: none
+
+   "String8"
 
 
 -------------
@@ -797,6 +1037,16 @@ Encodes to a ByteString as a ``Vector16`` of ``Char`` s
    encodeBinary :: String16 -> ByteString
    encodeBinary x = vector16ToByteString (map utf8AsByteString (string16AsVector16 x))
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``String16``.
+
+.. code-block:: none
+
+   "String16"
+
 
 -------------
 
@@ -831,6 +1081,16 @@ Encodes to a ByteString as a ``Vector32`` of ``Char`` s
    encodeBinary :: String32 -> ByteString
    encodeBinary x = vector32ToByteString (map utf8AsByteString (string32AsVector32 x))
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``String32``.
+
+.. code-block:: none
+
+   "String32"
+
 
 -------------
 
@@ -864,6 +1124,16 @@ Encodes to a ByteString as a ``Vector64`` of ``Char`` s
 
    encodeBinary :: String64 -> ByteString
    encodeBinary x = vector64ToByteString (map utf8AsByteString (string64AsVector64 x))
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``String64``.
+
+.. code-block:: none
+
+   "String64"
 
 
 -------------
@@ -918,6 +1188,16 @@ And "practical" in the sense of Ancient History (3000 B.C.E.) being the limit of
        ++ (uintAsByteString month)
        ++ (uintAsByteString day)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Date``.
+
+.. code-block:: none
+
+   "Date"
+
 
 -------------
 
@@ -970,6 +1250,16 @@ when dealing with large amounts of time data.
          ++ (uintAsByteString second)
          ++ (uintAsByteStringBE millisecond)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``Time``.
+
+.. code-block:: none
+
+   "Time"
+
 
 -------------
 
@@ -1010,6 +1300,16 @@ Concatenation of both formats (total of 11 bytes).
 
    - Intervals, Durations
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``DateTime``.
+
+.. code-block:: none
+
+   "DateTime"
+
 -------------
 
 URI-Like
@@ -1047,6 +1347,16 @@ Encoded directly as 4 bytes
        ++ (uintAsByteStringBE b)
        ++ (uintAsByteStringBE c)
        ++ (uintAsByteStringBE d)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``IPV4``.
+
+.. code-block:: none
+
+   "IPV4"
 
 
 -------------
@@ -1091,6 +1401,16 @@ Encoded directly as 16 bytes
        ++ (uintAsByteStringBE g)
        ++ (uintAsByteStringBE h)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``IPV6``.
+
+.. code-block:: none
+
+   "IPV6"
+
 
 -------------
 
@@ -1124,6 +1444,16 @@ exist in a future version.
    encodeByteString :: URI -> ByteString
    encodeByteString x = utf8AsByteString (uriAsString x)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``URI``.
+
+.. code-block:: none
+
+   "URI"
+
 
 -------------
 
@@ -1156,6 +1486,16 @@ Encoded as a UTF-8 ``String16`` (though there are only ASCII characters allowed)
 .. todo::
 
     - International Email Addresses a 'la https://en.wikipedia.org/wiki/International_email
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed solely as ``EmailAddress``.
+
+.. code-block:: none
+
+   "EmailAddress"
 
 -------------
 
@@ -1202,6 +1542,16 @@ Ommits a size parameter, because the size is encoded in the type signature.
      Nil -> emptyByteString
      Cons y ys -> y ++ (encodeBinary ys)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Array 20 Int32`` (length of 20 ``Int32`` s).
+
+.. code-block:: none
+
+   "Array"
+
 
 -------------
 
@@ -1230,6 +1580,16 @@ Prefixes the length of the array as a 8-bit unsigned integer, big-endian, before
 
    encodeBinary :: Vector8 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector8 x)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Vector8 Int32``.
+
+.. code-block:: none
+
+   "Vector8"
 
 
 -------------
@@ -1260,6 +1620,16 @@ Prefixes the length of the array as a 16-bit unsigned integer, big-endian, befor
    encodeBinary :: Vector16 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector16 x)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Vector16 Int32``.
+
+.. code-block:: none
+
+   "Vector16"
+
 
 -------------
 
@@ -1289,6 +1659,16 @@ Prefixes the length of the array as a 32-bit unsigned integer, big-endian, befor
    encodeBinary :: Vector32 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector32 x)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Vector32 Int32``.
+
+.. code-block:: none
+
+   "Vector32"
+
 
 -------------
 
@@ -1317,6 +1697,16 @@ Prefixes the length of the array as a 64-bit unsigned integer, big-endian, befor
 
    encodeBinary :: Vector64 ByteString -> ByteString
    encodeBinary x = (uintAsByteStringBE l) ++ (concatVector64 x)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Vector64 Int32``.
+
+.. code-block:: none
+
+   "Vector64"
 
 
 -------------
@@ -1356,6 +1746,16 @@ Use a prefix byte flag to avoid backtracking
      Nothing -> byteAsByteString 0
      Just y -> (byteAsByteString 1) ++ y
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Maybe Int32``.
+
+.. code-block:: none
+
+   "Maybe"
+
 
 -------------
 
@@ -1387,6 +1787,16 @@ Is equivalent to an array of size 2, therefore avoids a size prefix
 
    encodeBinary :: Tuple ByteString ByteString -> ByteString
    encodeBinary (Tuple x y) = x ++ y
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Tuple Int32 Int32``.
+
+.. code-block:: none
+
+   "Tuple"
 
 
 -------------
@@ -1423,6 +1833,16 @@ Flags each case with a byte prefix
    encodeBinary x = case x of
      Left y -> (byteAsByteString 0) ++ y
      Right z -> (byteAsByteString 1) ++ z
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Either Int32 Int32``.
+
+.. code-block:: none
+
+   "Either"
 
 
 -------------
@@ -1465,6 +1885,16 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 8-
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringMap8 Int32``.
+
+.. code-block:: none
+
+   "StringMap8"
+
 
 -------------
 
@@ -1497,6 +1927,16 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 16
      where
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringMap16 Int32``.
+
+.. code-block:: none
+
+   "StringMap16"
 
 
 -------------
@@ -1531,6 +1971,16 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 32
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringMap32 Int32``.
+
+.. code-block:: none
+
+   "StringMap32"
+
 
 -------------
 
@@ -1564,6 +2014,16 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 64
        tupleToByteString :: Tuple String ByteString -> ByteString
        tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringMap64 Int32``.
+
+.. code-block:: none
+
+   "StringMap64"
+
 
 
 
@@ -1596,11 +2056,21 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 8-
 
 .. code-block:: haskell
 
-   encodeBinary :: Map8 ByteString -> ByteString
+   encodeBinary :: Map8 ByteString ByteString -> ByteString
    encodeBinary x = concatVector8 (map tupleToByteString (map8AsVector8 x))
      where
-       tupleToByteString :: Tuple String ByteString -> ByteString
-       tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
+       tupleToByteString :: Tuple ByteString ByteString -> ByteString
+       tupleToByteString (Tuple k v) = k ++ v
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Map8 Int32 Int32``.
+
+.. code-block:: none
+
+   "Map8"
 
 
 -------------
@@ -1632,11 +2102,21 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 16
 
 .. code-block:: haskell
 
-   encodeBinary :: Map16 ByteString -> ByteString
+   encodeBinary :: Map16 ByteString ByteString -> ByteString
    encodeBinary x = concatVector16 (map tupleToByteString (map16AsVector16 x))
      where
-       tupleToByteString :: Tuple String ByteString -> ByteString
-       tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
+       tupleToByteString :: Tuple ByteString ByteString -> ByteString
+       tupleToByteString (Tuple k v) = k ++ v
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Map16 Int32 Int32``.
+
+.. code-block:: none
+
+   "Map16"
 
 
 -------------
@@ -1668,11 +2148,21 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 32
 
 .. code-block:: haskell
 
-   encodeBinary :: Map32 ByteString -> ByteString
+   encodeBinary :: Map32 ByteString ByteString -> ByteString
    encodeBinary x = concatVector32 (map tupleToByteString (map32AsVector32 x))
      where
-       tupleToByteString :: Tuple String ByteString -> ByteString
-       tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
+       tupleToByteString :: Tuple ByteString ByteString -> ByteString
+       tupleToByteString (Tuple k v) = k ++ v
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Map32 Int32 Int32``.
+
+.. code-block:: none
+
+   "Map32"
 
 
 -------------
@@ -1704,11 +2194,21 @@ Encodes as a dynamically sized array of key-value tuples, where the size is a 64
 
 .. code-block:: haskell
 
-   encodeBinary :: Map64 ByteString -> ByteString
+   encodeBinary :: Map64 ByteString ByteString -> ByteString
    encodeBinary x = concatVector64 (map tupleToByteString (map64AsVector64 x))
      where
-       tupleToByteString :: Tuple String ByteString -> ByteString
-       tupleToByteString (Tuple k v) = (encodeByteString k) ++ v
+       tupleToByteString :: Tuple ByteString ByteString -> ByteString
+       tupleToByteString (Tuple k v) = k ++ v
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Map64 Int32 Int32``.
+
+.. code-block:: none
+
+   "Map64"
 
 
 
@@ -1754,6 +2254,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie8 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringTrie8 Int32``.
+
+.. code-block:: none
+
+   "StringTrie8"
+
 
 -------------
 
@@ -1793,6 +2303,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
      where
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie16 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringTrie16 Int32``.
+
+.. code-block:: none
+
+   "StringTrie16"
 
 
 -------------
@@ -1834,6 +2354,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie32 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringTrie32 Int32``.
+
+.. code-block:: none
+
+   "StringTrie32"
+
 
 -------------
 
@@ -1873,6 +2403,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
      where
        tupleToByteString :: Tuple (Maybe ByteString) (StringTrie64 ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``StringTrie64 Int32``.
+
+.. code-block:: none
+
+   "StringTrie64"
 
 
 -------------
@@ -1914,6 +2454,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (Trie8 ByteString ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Trie8 Int32 Int32``.
+
+.. code-block:: none
+
+   "Trie8"
+
 
 -------------
 
@@ -1953,6 +2503,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
      where
        tupleToByteString :: Tuple (Maybe ByteString) (Trie16 ByteString ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Trie16 Int32 Int32``.
+
+.. code-block:: none
+
+   "Trie16"
 
 
 -------------
@@ -1994,6 +2554,16 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
        tupleToByteString :: Tuple (Maybe ByteString) (Trie32 ByteString ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
 
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Trie32 Int32 Int32``.
+
+.. code-block:: none
+
+   "Trie32"
+
 
 -------------
 
@@ -2033,4 +2603,14 @@ Encoded as a series of dynamically sized arrays - uses composite ``encodeByteStr
      where
        tupleToByteString :: Tuple (Maybe ByteString) (Trie64 ByteString ByteString) -> ByteString
        tupleToByteString (Tuple v y) = (maybeToByteString v) ++ (encodeByteString y)
+
+Topic
+^^^^^
+
+String literal :ref:`Topic <topic>` used in the :ref:`Symbiote Test Suite <testsuite>` for this data type.
+Composed as ``Trie64 Int32 Int32``.
+
+.. code-block:: none
+
+   "Trie64"
 
