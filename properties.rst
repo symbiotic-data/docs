@@ -256,7 +256,7 @@ through the ``Ordering`` type.
 
    data Ordering = LT | EQ | GT
 
-   class Ord a where
+   class Eq a => Ord a where
      compare :: a -> a -> Ordering
 
    (<=) :: Ord a => a -> a -> Bool
@@ -545,7 +545,7 @@ defined on it, ``sub``, and it should facilitate an `additive inverse <https://e
 
 .. code-block:: haskell
 
-   class Ring a where
+   class Semiring a => Ring a where
      sub :: a -> a -> a
 
    isAdditiveInverse :: Ring a =>
@@ -603,7 +603,7 @@ defined on it, ``recip``, and it should facilitate a `multiplicative inverse <ht
 
 .. code-block:: haskell
 
-   class DivisionRing a where
+   class Ring a => DivisionRing a where
      recip :: a -> a
 
    isInverse :: DivisionRing a =>
@@ -661,7 +661,7 @@ defined on it, but assumes ``mul`` is `commutative <https://en.wikipedia.org/wik
 
 .. code-block:: haskell
 
-   class CommutativeRing a
+   class Ring a => CommutativeRing a
 
    isCommutative :: CommutativeRing a =>
      a -> a -> Bool
@@ -719,7 +719,7 @@ however, we can only test for the integral domain (due to language compatibility
 
 .. code-block:: haskell
 
-   class EuclideanRing a where
+   class CommutativeRing a => EuclideanRing a where
      degree :: a -> Int
      mod :: a -> a -> a
      div :: a -> a -> a
@@ -779,7 +779,7 @@ defined on it, but is a `field <https://en.wikipedia.org/wiki/Field_(mathematics
 
 .. code-block:: haskell
 
-   class Field a
+   class (DivisionRing a, EuclideanRing a) => Field a
 
 Operations
 ~~~~~~~~~~
