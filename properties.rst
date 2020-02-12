@@ -17,6 +17,9 @@ The superclass structure is as follows:
      => Ord
        => Enum
 
+   HeytingAlgebra
+     => BooleanAlgebra
+
    Semiring
      => Ring
        => DivisionRing ------\
@@ -627,8 +630,63 @@ Binary
        (byteToByteString 13) ++ y ++ z
      Compliment ->
        (byteToByteString 14)
-       
 
+---------------
+       
+BooleanAlgebra
+--------------
+
+BooleanAlgebra is a superclass of HeytingAlgebra_ and inherit all of its faculties. It has no additional
+operations defined on it, but it should facilitate a `boolean algebra <https://en.wikipedia.org/wiki/Boolean_algebra>`_, by supporting the `law of the excluded middle <https://en.wikipedia.org/wiki/Law_of_excluded_middle>`_.
+
+.. code-block:: haskell
+
+   class HeytingAlgebra a => BooleanAlgebra a
+
+   hasLawOfExcludedMiddle :: BooleanAlgebra a =>
+     a -> Bool
+   hasLawOfExcludedMiddle x = (disj x (not x)) == tt
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data BooleanAlgebraOperation a
+     = BooleanAlgebraHeytingAlgebra (HeytingAlgebraOperation a)
+     | LawOfExcludedMiddle
+
+   performBooleanAlgebra :: BooleanAlgebra a =>
+     BooleanAlgebraOperation a -> a -> Bool
+   performBooleanAlgebra op x = case op of
+     BooleanAlgebraHeytingAlgebra op' ->
+       performHeytingAlgebra op' x
+     LawOfExcludedMiddle ->
+       hasLawOfExcludedMiddle x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: BooleanAlgebraOperation Json -> Json
+   encodeJson op = case op of
+     BooleanAlgebraHeytingAlgebra op' ->
+       {"heytingAlgebra": encodeJson op'}
+     LawOfExcludedMiddle ->
+       "lawOfExcludedMiddle"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: BooleanAlgebraOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     BooleanAlgebraHeytingAlgebra op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     LawOfExcludedMiddle ->
+       (byteToByteString 1)
 
 
 ---------------
