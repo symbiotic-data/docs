@@ -420,6 +420,219 @@ Binary
 
 ---------------
 
+HeytingAlgebra
+--------------
+
+HeytingAlgebra has six operations defined on it, ``ff``, ``tt``, ``implies``, ``conj``, ``disj``, and ``not``.
+It should form a `heyting algebra <https://en.wikipedia.org/wiki/Heyting_algebra>`_.
+
+.. code-block:: haskell
+
+   class HeytingAlgebra a where
+     ff :: a
+     tt :: a
+     implies :: a -> a -> a
+     conj :: a -> a -> a
+     disj :: a -> a -> a
+     not :: a -> a
+
+   isDisjAssociative :: HeytingAlgebra a =>
+     a -> a -> a -> Bool
+   isDisjAssociative x y z = (disj x (disj y z)) == (disj (disj x y) z)
+
+   isConjAssociative :: HeytingAlgebra a =>
+     a -> a -> a -> Bool
+   isConjAssociative x y z = (conj x (conj y z)) == (conj (conj x y) z)
+
+   isDisjCommutative :: HeytingAlgebra a =>
+     a -> a -> Bool
+   isDisjCommutative x y = (disj x y) == (disj y x)
+
+   isConjCommutative :: HeytingAlgebra a =>
+     a -> a -> Bool
+   isConjCommutative x y = (conj x y) == (conj y x)
+
+   disjConjAbsorption :: HeytingAlgebra a =>
+     a -> a -> Bool
+   disjConjAbsorption x y = (disj x (conj x y)) == x
+
+   conjDisjAbsorption :: HeytingAlgebra a =>
+     a -> a -> Bool
+   conjDisjAbsorption x y = (conj x (disj x y)) == x
+
+   isDisjIdempotent :: HeytingAlgebra a =>
+     a -> Bool
+   isDisjIdempotent x = (disj x x) == x
+
+   isConjIdempotent :: HeytingAlgebra a =>
+     a -> Bool
+   isConjIdempotent x = (conj x x) == x
+
+   disjIdentity :: HeytingAlgebra a =>
+     a -> Bool
+   disjIdentity x = (disj x ff) == x
+
+   conjIdentity :: HeytingAlgebra a =>
+     a -> Bool
+   conjIdentity x = (conj x tt) == x
+
+   implicationTop :: HeytingAlgebra a =>
+     a -> Bool
+   implicationTop x = (implies x x) == tt
+
+   implicationApplication :: HeytingAlgebra a =>
+     a -> a -> Bool
+   implicationApplication x y = (conj x (implies x y)) == (conj x y)
+
+   implicationConclusion :: HeytingAlgebra a =>
+     a -> a -> Bool
+   implicaitonConclusion x y = (conj y (implies x y)) == y
+
+   implicationDistributive :: HeytingAlgebra a =>
+     a -> a -> a -> Bool
+   implicationDistributive x y z = (implies x (conj y z)) == (conj (implies x y) (implies x z))
+
+   hasCompliment :: HeytingAlgebra a =>
+     a -> Bool
+   hasCompliment x = (not a) == (implies x ff)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data HeytingAlgebraOperation a
+     = DisjAssociative a a
+     | ConjAssociative a a
+     | DisjCommutative a
+     | ConjCommutative a
+     | DisjConjAbsorption a
+     | ConjDisjAbsorption a
+     | DisjIdempotent
+     | ConjIdempotent
+     | DisjIdentity
+     | ConjIdentity
+     | ImplicationTop
+     | ImplicationApplication a
+     | ImplicationConclusion a
+     | ImplicationDistribution a a
+     | Compliment
+
+   performHeytingAlgebra :: HeytingAlgebra a =>
+     HeytingAlgebraOperation a -> a -> Bool
+   performHeytingAlgebra op x = case op of
+     DisjAssociative y z ->
+       isDisjAssociatve x y z
+     ConjAssociative y z ->
+       isConjAssociatve x y z
+     DisjCommutative y ->
+       isDisjCommutative x y
+     ConjCommutative y ->
+       isConjCommutative x y
+     DisjConjAbsorption y ->
+       disjConjAbsorption x y
+     ConjDisjAbsorption y ->
+       conjDisjAbsorption x y
+     DisjIdempotent ->
+       isDisjIdempotent x
+     ConjIdempotent ->
+       isConjIdempotent x
+     DisjIdentity ->
+       disjIdentity x
+     ConjIdentity ->
+       conjIdentity x
+     ImplicationTop ->
+       implicationTop x
+     ImplicationApplication y ->
+       implicationApplication x y
+     ImplicationConclusion y ->
+       implicationConclusion x y
+     ImplicationDistributive y z ->
+       implicationDistributive x y z
+     Compliment ->
+       hasCompliment x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: HeytingAlgebraOperation Json -> Json
+   encodeJson op = case op of
+     DisjAssociative y z ->
+       {"disjAssociative": {"y": y, "z": z}}
+     ConjAssociative y z ->
+       {"conjAssociative": {"y": y, "z": z}}
+     DisjCommutative y ->
+       {"disjCommutative": y}
+     ConjCommutative y ->
+       {"conjCommutative": y}
+     DisjConjAbsorption y ->
+       {"disjConjAbsorption": y}
+     ConjDisjAbsorption y ->
+       {"conjDisjAbsorption": y}
+     DisjIdempotent ->
+       "disjIdempotent"
+     ConjIdempotent ->
+       "conjIdempotent"
+     DisjIdentity ->
+       "disjIdentity"
+     ConjIdentity ->
+       "conjIdentity"
+     ImplicationTop ->
+       "implicationTop"
+     ImplicationApplication y ->
+       {"implicationApplication": y}
+     ImplicationConclusion y ->
+       {"implicationConclusion": y}
+     ImplicationDistributive y z ->
+       {"implicationDistributive": {"y": y, "z": z}}
+     Compliment ->
+       "compliment"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: HeytingAlgebraOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     DisjAssociative y z ->
+       (byteToByteString 0) ++ y ++ z
+     ConjAssociative y z ->
+       (byteToByteString 1) ++ y ++ z
+     DisjCommutative y ->
+       (byteToByteString 2) ++ y
+     ConjCommutative y ->
+       (byteToByteString 3) ++ y
+     DisjConjAbsorption y ->
+       (byteToByteString 4) ++ y
+     ConjDisjAbsorption y ->
+       (byteToByteString 5) ++ y
+     DisjIdempotent ->
+       (byteToByteString 6)
+     ConjIdempotent ->
+       (byteToByteString 7)
+     DisjIdentity ->
+       (byteToByteString 8)
+     ConjIdentity ->
+       (byteToByteString 9)
+     ImplicationTop ->
+       (byteToByteString 10)
+     ImplicationApplication y ->
+       (byteToByteString 11) ++ y
+     ImplicationConclusion y ->
+       (byteToByteString 12) ++ y
+     ImplicationDistributive y z ->
+       (byteToByteString 13) ++ y ++ z
+     Compliment ->
+       (byteToByteString 14)
+       
+
+
+
+---------------
+
 Semiring
 --------
 

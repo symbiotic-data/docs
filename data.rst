@@ -38,6 +38,36 @@ Stores it as the byte ``0``
 Symbiote Test Suite Instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Instances
+*********
+
+This data type implements a number of instances from the :ref:`Algebraic Properties <properties>` specification:
+
+.. code-block:: haskell
+
+   instance Semigroup Unit where
+     append Unit Unit = Unit
+   instance Monoid Unit where
+     mempty = Unit
+   instance Eq Unit where
+     eq Unit Unit = True
+   instance Ord Unit where
+     compare Unit Unit = EQ
+   instance Enum Unit where
+     pred Unit = Unit
+     succ Unit = Unit
+     toEnum 0 = Just Unit
+     toEnum _ = Nothing
+     fromEnum Unit = 0
+   instance Semiring Unit where
+     zero = Unit
+     one = Unit
+     add Unit Unit = Unit
+     mul Unit Unit = Unit
+   instance Ring Unit where
+     sub Unit Unit = Unit
+   instance CommutativeRing Unit
+
 Topic
 *****
 
