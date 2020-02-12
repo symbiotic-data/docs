@@ -59,6 +59,14 @@ This data type implements a number of instances from the :ref:`Algebraic Propert
      toEnum 0 = Just Unit
      toEnum _ = Nothing
      fromEnum Unit = 0
+   instance HeytingAlgebra Unit where
+     ff = Unit
+     tt = Unit
+     implies Unit Unit = Unit
+     disj Unit Unit = Unit
+     conj Unit Unit = Unit
+     not Unit = Unit
+   instance BooleanAlgebra Unit
    instance Semiring Unit where
      zero = Unit
      one = Unit
