@@ -15,7 +15,9 @@ The superclass structure is as follows:
 
    Eq
      => Ord
-       => Enum
+       => Enum ------\
+                      => BoundedEnum
+       => Bounded ---/
 
    HeytingAlgebra
      => BooleanAlgebra
@@ -340,19 +342,15 @@ Binary
 Enum
 ----
 
-Enum is **not** a superclass of Ord_, but it uses its faculties in testing. It has four operations
-defined on it, ``pred``, ``succ``, ``toEnum``, and ``fromEnum``.
-``pred`` and ``succ`` should be opposite - `isomorphic <https://en.wikipedia.org/wiki/Isomorphism>`_ over composition.
-Furthermore, ``fromEnum`` should be `homomorphic <https://en.wikipedia.org/wiki/Homomorphism>`_ over ``compare``.
-Enums are `total orders <https://en.wikipedia.org/wiki/Total_order>`_.
+Enum is **not** a superclass of Ord_, but it uses its faculties in testing. It has two operations
+defined on it, ``pred``, ``succ``.
+``pred`` and ``succ`` should be opposite --- `isomorphic <https://en.wikipedia.org/wiki/Isomorphism>`_ over composition.
 
 .. code-block:: haskell
 
    class Enum a where
      pred :: a -> a
      succ :: a -> a
-     toEnum :: Int -> Maybe a
-     fromEnum :: a -> Int
 
    predsucc :: Enum a =>
      a -> Bool
@@ -362,10 +360,6 @@ Enums are `total orders <https://en.wikipedia.org/wiki/Total_order>`_.
      a -> Bool
    succpred x = (succ (pred x)) == x
 
-   compareHom :: Enum a => Ord a =>
-     a -> a -> Bool
-   compareHom x y = (compare x y) == (compare (fromEnum x) (fromEnum y))
-
 Operations
 ~~~~~~~~~~
 
@@ -373,7 +367,6 @@ Operations
 
    data EnumOperation a
      = EnumOrd (OrdOperation a)
-     | EnumCompareHom a
      | EnumPredSucc
      | EnumSuccPred
 
@@ -382,8 +375,6 @@ Operations
    performEnum op x = case op of
      EnumOrd op' ->
        perfromOrd op' x
-     EnumCompareHom y ->
-       compareHom x y
      EnumPredSucc ->
        predsucc x
      EnumSuccPred ->
@@ -398,8 +389,6 @@ JSON
    encodeJson op = case op of
      EnumOrd op' ->
        {"ord": enocdeJson op'}
-     EnumCompareHom y ->
-       {"compareHom": y}
      EnumPredSucc ->
        "predsucc"
      EnumSuccPred ->
@@ -414,12 +403,171 @@ Binary
    encodeBinary op = case op of
      EnumOrd op' ->
        (byteAsByteString 0) ++ encodeBinary op'
-     EnumCompareHom y ->
-       (byteAsByteString 1) ++ y
      EnumPredSucc ->
-       (byteAsByteString 2)
+       (byteAsByteString 1)
      EnumSuccPred ->
+       (byteAsByteString 2)
+
+---------------
+
+Bounded
+-------
+
+Bounded is **not** a superclass of Ord_, but it uses its faculties in testing. It has two values
+defined on it, ``top`` and ``bottom``.
+Types that are Bounded are `bounded lattices <https://en.wikipedia.org/wiki/Lattice_(order)#Bounded_lattice>`_.
+
+.. code-block:: haskell
+
+   class Bounded a where
+     top :: a
+     bottom :: a
+
+   isBetween :: Bounded a => Ord a =>
+     a -> Bool
+   isBetween x = (x <= top) && (bottom <= x)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data BoundedOperation a
+     = BoundedOrd (OrdOperation a)
+     | BoundedBetween
+
+   performBounded :: Bounded a => Ord a =>
+     BoundedOperation a -> a -> Bool
+   performBounded op x = case op of
+     BoundedOrd op' ->
+       performOrd op' x
+     BoundedBetween ->
+       isBetween x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: BoundedOperation Json -> Json
+   encodeJson op = case op of
+     BoundedOrd op' ->
+       {"ord": encodeJson op'}
+     BoundedBetween ->
+       "between"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: BoundedOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     BoundedOrd op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     BoundedBetween ->
+       (byteToByteString 1)
+
+---------------
+
+BoundedEnum
+-----------
+
+BoundedEnum is a superclass of both Enum_ and Bounded_, and inherit all of their faculties. It has two additional operations
+defined on it, ``toEnum`` and ``fromEnum``. They should be opposite functions to each other, and
+furthermore, ``fromEnum`` should be `homomorphic <https://en.wikipedia.org/wiki/Homomorphism>`_ over ``compare``.
+BoundedEnums are `total orders <https://en.wikipedia.org/wiki/Total_order>`_.
+
+.. code-block:: haskell
+
+   class (Bounded a, Enum a) => BoundedEnum a where
+     toEnum :: Int -> Maybe a
+     fromEnum :: a -> Int
+
+   compareHom :: BoundedEnum a => Ord a =>
+     a -> a -> Bool
+   compareHom x y = (compare x y) == (compare (fromEnum x) (fromEnum y))
+
+   fromPredMapping :: BoundedEnum a =>
+     a -> Bool
+   fromPredMapping x = (fromEnum (pred x)) == (pred (fromEnum x))
+
+   fromSuccMapping :: BoundedEnum a =>
+     a -> Bool
+   fromSuccMapping x = (fromEnum (succ x)) == (succ (fromEnum x))
+
+   toFromIsomorphism :: Enum a =>
+     a -> Bool
+   toFromIsomorphism x = (toEnum (fromEnum x)) == (Just x)
+
+Operations
+~~~~~~~~~~
+
+.. code-block:: haskell
+
+   data BoundedEnumOperation a
+     = BoundedEnumEnum (EnumOperation a)
+     | BoundedEnumBounded (BoundedOperation a)
+     | BoundedEnumCompareHom a
+     | BoundedEnumFromPred
+     | BoundedEnumFromSucc
+     | BoundedEnumToFromIso
+
+   performBoundedEnum :: BoundedEnum a => Ord a =>
+     BoundedEnumOperation a -> a -> Bool
+   performBoundedEnum op x = case op of
+     BoundedEnumEnum op' ->
+       performEnum op' x
+     BoundedEnumBounded op' ->
+       performBounded op' x
+     BoundedEnumCompareHom y ->
+       compareHom x y
+     BoundedEnumFromPred ->
+       fromPredMapping x
+     BoundedEnumFromSucc ->
+       fromSuccMapping x
+     BoundedEnumToFromIso ->
+       toFromIsomorphism x
+
+JSON
+****
+
+.. code-block:: haskell
+
+   encodeJson :: BoundedEnumOperation Json -> Json
+   encodeJson op = case op of
+     BoundedEnumEnum op' ->
+       {"enum": encodeJson op'}
+     BoundedEnumBounded op' ->
+       {"bounded": encodeJson op'}
+     BoundedEnumCompareHom y ->
+       {"compareHom": y}
+     BoundedEnumFromPred ->
+       "fromPred"
+     BoundedEnumFromSucc ->
+       "fromSucc"
+     BoundedEnumToFromIso ->
+       "toFromIso"
+
+Binary
+******
+
+.. code-block:: haskell
+
+   encodeBinary :: BoundedEnumOperation ByteString -> ByteString
+   encodeBinary op = case op of
+     BoundedEnumEnum op' ->
+       (byteAsByteString 0) ++ encodeBinary op'
+     BoundedEnumBounded op' ->
+       (byteAsByteString 1) ++ encodeBinary op'
+     BoundedEnumCompareHom y ->
+       (byteAsByteString 2) ++ y
+     BoundedEnumFromPred ->
        (byteAsByteString 3)
+     BoundedEnumFromSucc ->
+       (byteAsByteString 4)
+     BoundedEnumToFromIso ->
+       (byteAsByteString 5)
 
 ---------------
 
