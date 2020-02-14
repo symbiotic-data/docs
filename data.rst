@@ -56,12 +56,13 @@ This data type implements a number of instances from the :ref:`Algebraic Propert
    instance Enum Unit where
      pred Unit = Unit
      succ Unit = Unit
-     toEnum 0 = Just Unit
-     toEnum _ = Nothing
-     fromEnum Unit = 0
    instance Bounded Unit where
      top = Unit
      bottom = Unit
+   instance BoundedEnum Unit where
+     toEnum 0 = Just Unit
+     toEnum _ = Nothing
+     fromEnum Unit = 0
    instance HeytingAlgebra Unit where
      ff = Unit
      tt = Unit
