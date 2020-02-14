@@ -80,6 +80,50 @@ This data type implements a number of instances from the :ref:`Algebraic Propert
      sub Unit Unit = Unit
    instance CommutativeRing Unit
 
+Operations
+**********
+
+.. code-block:: haskell
+
+   data UnitOperation
+     = UnitMonoid (MonoidOperation Unit)
+     | UnitBoundedEnum (BoundedEnumOperation Unit)
+     | UnitBooleanAlgebra (BooleanAlgebraOperation Unit)
+     | UnitCommutativeRing  (CommutativeRingOperation Unit)
+
+   performUnit :: UnitOperation -> Unit -> Bool
+   performUnit op x = case op of
+     UnitMonoid op' ->
+       performMonoid op' x
+     UnitBoundedEnum op' ->
+       performBoundedEnum op' x
+     UnitBooleanAlgebra op' ->
+       performBooleanAlgebra op' x
+     UnitCommutativeRing op' ->
+       performCommutativeRing op' x
+
+   encodeJson :: UnitOperation -> Json
+   encodeJson op = case op of
+     UnitMonoid op' ->
+       {"monoid": encodeJson op'}
+     UnitBoundedEnum op' ->
+       {"boundedEnum": encodeJson op'}
+     UnitBooleanAlgebra op' ->
+       {"booleanAlgebra": encodeJson op'}
+     UnitCommutativeRing op' ->
+       {"commutativeRing": encodeJson op'}
+
+   encodeBinary :: UnitOperation -> ByteString
+   encodeBinary op = case op of
+     UnitMonoid op' ->
+       (byteToByteString 0) ++ encodeBinary op'
+     UnitBoundedEnum op' ->
+       (byteToByteString 1) ++ encodeBinary op'
+     UnitBooleanAlgebra op' ->
+       (byteToByteString 2) ++ encodeBinary op'
+     UnitCommutativeRing op' ->
+       (byteToByteString 3) ++ encodeBinary op'
+
 Topic
 *****
 
