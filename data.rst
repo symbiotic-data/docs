@@ -170,6 +170,77 @@ Uses standard bytes ``0`` as false, ``1`` as true
 Symbiote Test Suite Instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Instances
+*********
+
+This data type implements a number of instances from the :ref:`Algebraic Properties <properties>` specification:
+
+.. code-block:: haskell
+
+   instance Eq Boolean where
+     eq True  True  = True
+     eq False False = True
+     eq _     _     = False
+   instance Ord Boolean where
+     compare False True  = LT
+     compare True  False = GT
+     compare _     _     = EQ
+   instance Enum Unit where
+     pred False = False
+     pred True  = False
+     succ False = True
+     succ True  = True
+   instance Bounded Unit where
+     top = True
+     bottom = False
+   instance BoundedEnum Unit where
+     toEnum 0 = Just False
+     toEnum 1 = Just True
+     toEnum _ = Nothing
+     fromEnum False = 0
+     fromEnum True  = 1
+   instance HeytingAlgebra Unit where
+     ff = False
+     tt = True
+     implies p q = if p then q else True
+     disj False False = False
+     disj _     _     = True
+     conj True True = True
+     conj _    _    = False
+     not False = True
+     not True  = False
+   instance BooleanAlgebra Unit
+
+Operations
+**********
+
+.. code-block:: haskell
+
+   data BooleanOperation
+     = BooleanBoundedEnum (BoundedEnumOperation Boolean)
+     | BooleanBooleanAlgebra (BooleanAlgebraOperation Boolean)
+
+   performBoolean :: BooleanOperation -> Boolean -> Bool
+   performBoolean op x = case op of
+     BooleanBoundedEnum op' ->
+       performBoundedEnum op' x
+     BooleanBooleanAlgebra op' ->
+       performBooleanAlgebra op' x
+
+   encodeJson :: BooleanOperation -> Json
+   encodeJson op = case op of
+     BooleanBoundedEnum op' ->
+       {"boundedEnum": encodeJson op'}
+     BooleanBooleanAlgebra op' ->
+       {"booleanAlgebra": encodeJson op'}
+
+   encodeBinary :: BooleanOperation -> ByteString
+   encodeBinary op = case op of
+     BooleanBoundedEnum op' ->
+       (byteToByteString 1) ++ encodeBinary op'
+     BooleanBooleanAlgebra op' ->
+       (byteToByteString 2) ++ encodeBinary op'
+
 Topic
 *****
 
