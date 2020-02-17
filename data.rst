@@ -143,6 +143,17 @@ Boolean
 
    data Boolean = True | False
 
+.. note::
+
+   Although throughout this text, in Haskell, we functionally use the ``Bool`` type to denote true/false
+   values; that's only due to that language's design. For all intents and purposes, a Symbiotic-Data
+   ``Boolean`` value is *functionally* the same as a operational true/false value, we opt to decide its
+   name as ``Boolean``, as opposed to ``Bool``, specifically to distinguish it from a programming language's
+   notions.
+
+   An implementation need not write a new data type for this Symbiotic-Data specification, however; it just
+   needs to associate its *Topic* value as ``Boolean``.
+
 JSON
 ^^^^
 
